@@ -1,0 +1,87 @@
+{% extends 'eog/basic.html' %}
+
+{% block title %}
+    用户管理
+{% endblock %}
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+    <h2>用户管理</h2>
+    <p>用户管理</p>
+
+    <table border="1px" width="500px">
+        <thead>
+        <tr>
+            <th><input type="checkbox" />全选</th>
+            <th>管理员ID</th>
+            <th>姓名</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="checkbox"/>小弟1</td>
+            <td>1</td>
+            <td>Tester</td>
+            <td>修改 删除</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"/>小弟2</td>
+            <td>2</td>
+            <td>Manager</td>
+            <td>修改 删除</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"/>小弟3</td>
+            <td>3</td>
+            <td>Analyst</td>
+            <td>修改 删除</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox"/>小弟4</td>
+            <td>4</td>
+            <td>Admin</td>
+            <td>修改 删除</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <script>
+
+        //查找thead下第一个th下的input
+        var chbAll = document.querySelector(
+            "thead th:first-child>input"
+        );
+        //查找tbody中所有第一个td下的input
+        var chbs = document.querySelectorAll(
+            "tbody td:first-child>input"
+        );
+        //为chbAll绑定单击事件
+        chbAll.onclick = function () {
+            //遍历chbs中每个chb
+            for (var i = 0; i < chbs.length; i++) {
+                //设置当前chb的checked等于this的checked
+                chbs[i].checked = this.checked;
+            }
+        };
+        //为chbs中每chb都绑定单击事件
+        for (var i = 0; i < chbs.length; i++) {
+            chbs[i].onclick = function () {
+                if (!this.checked)
+                    chbAll.checked = false;
+                else {
+                    //选择tbody下第一个td中的未选中的input
+                    var unchecked =
+                        document.querySelector(
+                            "tbody td:first-child>input:not(:checked)"
+                        );
+                    if (unchecked === null)
+                        chbAll.checked = true;
+                }
+            }
+        }
+    </script>
+
+{% endblock %}
