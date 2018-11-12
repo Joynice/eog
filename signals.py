@@ -9,8 +9,11 @@ namespace = Namespace()
 
 login_signal = namespace.signal('login')
 logout_signal = namespace.signal('logout')
-account_signal = namespace.signal('account')
-
+change_lcon_signal = namespace.signal('change_lcon')
+change_email_signal = namespace.signal('change_email')
+change_password_signal = namespace.signal('change_password')
+change_username_signal = namespace.signal('change_username')
+forget_password_signal = namespace.signal('forget_password')
 
 
 def login_log(sender, handler, ip, login_time):
@@ -28,13 +31,40 @@ def logout_log(sender, logout_time):
         pass
 
 
-def change_lcon(sender, operate_time, ip, operate_detail='修改了头像'):
-    account = Account(operate_time=operate_time, operator=g.eog_user.email, ip=ip, operate_detail=operate_detail, today=datetime.datetime.today().date())
+def change_lcon(sender, operate_time, ip, operate_detail='修改头像'):
+    account = Account(operate_time=operate_time, operator=g.eog_user.email, ip=ip, operate_detail=operate_detail,
+                      today=datetime.datetime.today().date())
     account.save()
 
-def change_username(sender, operate_time,ip,operate_datail):
-    account = Account(operate_time=operate_time, operator=g.eog_user.email,ip=ip,operate_detail=operate_datail,today=datetime.datetime.today().date())
+
+def change_username(sender, operate_time, ip, operate_detail='修改用户名'):
+    account = Account(operate_time=operate_time, operator=g.eog_user.email, ip=ip, operate_detail=operate_detail,
+                      today=datetime.datetime.today().date())
+    account.save()
+
+
+def change_email(sender, operate_time, ip, operate_detail='修改邮箱'):
+    account = Account(operate_time=operate_time, operator=g.eog_user.email, ip=ip, operate_detail=operate_detail,
+                      today=datetime.datetime.today().date())
+    account.save()
+
+
+def change_password(sender, operate_time, ip, operate_detail='修改密码'):
+    account = Account(operate_time=operate_time, operator=g.eog_user.email, ip=ip, operate_detail=operate_detail,
+                      today=datetime.datetime.today().date())
+    account.save()
+
+
+def forget_password(sender, operate_time, ip, operator, operate_detail='重置密码'):
+    account = Account(operate_time=operate_time, operator=operator, ip=ip, operate_detail=operate_detail,
+                      today=datetime.datetime.today().date())
+    account.save()
+
 
 login_signal.connect(login_log)
 logout_signal.connect(logout_log)
-account_signal.connect(change_lcon)
+change_lcon_signal.connect(change_lcon)
+change_username_signal.connect(change_username)
+change_email_signal.connect(change_email)
+change_password_signal.connect(change_password)
+forget_password_signal.connect(forget_password)

@@ -9,9 +9,10 @@ from .models import Event_Search_Engine, Rule
 from .decorators import login_required
 from .forms import ResetEmailForm, ResetpwdForm, ResetUsernameForm, AddSuggesionEvent
 from utils import restful
-from front.models import User, Log
+from front.models import User, Log, Account
 import os
-from signals import logout_signal, account_signal
+from signals import logout_signal, change_email_signal, change_password_signal, change_username_signal, \
+    change_lcon_signal
 from datetime import datetime
 
 bp = Blueprint('eog', __name__, url_prefix='/eog')
@@ -233,7 +234,6 @@ class LogView(views.MethodView):
             for i in log:
                 print(i.login_time)
             if not log:
-                print(111)
                 return restful.params_error(message='没有找到当天的登录信息！')
             else:
                 return restful.success(data=log)
@@ -254,6 +254,8 @@ class ResetPWView(views.MethodView):
             if user.password == oldpwd:
                 user.password = newpwd
                 user.save()
+                NowTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                change_password_signal.send(operate_time=NowTime, ip=request.remote_addr)
                 return restful.success()
             else:
                 return restful.params_error('旧密码错误！')
@@ -276,6 +278,9 @@ class ResetEmailView(views.MethodView):
                 return restful.params_error('该邮箱已经被注册，请选择未被使用的邮箱注册！')
             g.eog_user.email = email
             g.eog_user.save()
+            NowTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            change_email_signal.send(operate_time=NowTime, ip=request.remote_addr,
+                                     operate_detail='修改邮箱为:{}'.format(email))
             return restful.success()
         else:
             return restful.params_error(form.get_error())
@@ -293,6 +298,9 @@ class ResetUsernameView(views.MethodView):
             username = form.username.data
             g.eog_user.username = username
             g.eog_user.save()
+            NowTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            change_username_signal.send(operate_time=NowTime, ip=request.remote_addr,
+                                        operate_detail='修改用户名为:{}'.format(username))
             return restful.success('用户名修改成功！')
         else:
             return restful.params_error(form.get_error())
@@ -322,8 +330,12 @@ class UploadavatarView(views.MethodView):
         g.eog_user.avatar_path = '/static/eog/img/user/' + filename
         g.eog_user.save()
         NowTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        account_signal.send(operate_time=NowTime, ip=request.remote_addr,)
+        change_lcon_signal.send(operate_time=NowTime, ip=request.remote_addr)
         return restful.success('修改头像成功！')
+
+
+def dateTOtimestamp(date):
+    return time.mktime(time.strptime(date, '%Y-%m-%d'))
 
 
 class AccountView(views.MethodView):
@@ -333,11 +345,32 @@ class AccountView(views.MethodView):
         return render_template('eog/my_log.html')
 
     def post(self):
-        dict = {}
-        tag_id = request.form.get('tag_id')
-        date = request.form.get('date')
-        dict[tag_id] = date
-        print(dict)
+        date1 = request.form.get('date1')
+        date2 = request.form.get('date2')
+        print(date1, date2)
+        if date1 == '' and date2 == '':
+            return restful.params_error(message='请选择时间范围或者某一天！')
+        if date1 == '' and date2 != '':
+            return restful.params_error(message='请在第一个时间框内输入，查询当天的信息！')
+        if date1:
+            if date2:
+                if dateTOtimestamp(date1) > dateTOtimestamp(date2):
+                    return restful.params_error(message='查询的时间不合法！')
+                else:
+                    account = Account.objects(operator=g.eog_user.email, today__gte=date1,
+                                              today__lte=date2).order_by('-operate_time').all()
+                    print(account)
+                    if not account:
+                        return restful.params_error(message='没有找到这一时间段的账号信息')
+                    else:
+                        return restful.success(data=account)
+            else:
+                account = Account.objects(operator=g.eog_user.email,today=date1).order_by('-operate_time').all()
+                print(account)
+                if not account:
+                    return restful.params_error(message='没有找到{}的账号信息'.format(date1))
+                else:
+                    return restful.success(data=account)
 
 
 @bp.route('/remove/')
