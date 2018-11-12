@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 class Config(object):
     SECRET_KEY = 'hard_word'
     EVENT_PER_PAGE = 15
@@ -35,7 +34,7 @@ config = {
     'prodection': ProductionConfig,
     'default': DevelopmentConfig
 }
-=======
+
 class Config(object):
     SECRET_KEY = 'hard_word'
     EVENT_PER_PAGE = 15
@@ -72,4 +71,3 @@ config = {
     'prodection': ProductionConfig,
     'default': DevelopmentConfig
 }
->>>>>>> dev
