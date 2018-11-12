@@ -47,6 +47,3 @@ class Operate_Log(db.Document):
 
 
 
-
-
-

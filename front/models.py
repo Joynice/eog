@@ -72,4 +72,3 @@ class Account(db.Document):
     today = db.DateTimeField(required=False)
     operate_time = db.DateTimeField(required=False)
     operate_detail = db.StringField(required=False)
-    self = db.StringField(chices=['是', '否', '未知'], default='未知')
