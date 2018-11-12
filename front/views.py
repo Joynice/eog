@@ -3,7 +3,7 @@ __author__ = 'Joynice'
 from flask import Blueprint, views, render_template, request, url_for, redirect, session
 from .forms import SignupForm, LoginForm, ForgetpwdForm
 from .models import User
-from signals import login_signal
+from signals import login_signal, forget_password_signal
 from utils import restful
 import string
 import random
@@ -119,6 +119,8 @@ class Forgetpwd(views.MethodView):
             user = User.objects(email=email).first()
             user.password = password
             user.save()
+            NowTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            forget_password_signal.send(operate_time=NowTime, ip=request.remote_addr, operator=email, operate_detail='重置密码')
             return restful.success()
         else:
             return restful.params_error(message=form.get_error())
