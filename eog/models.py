@@ -85,3 +85,11 @@ class All_Result(db.Document):
     img = db.StringField()
     message = db.StringField()
 
+
+class Operate_Log(db.Document):
+    meta = {'collection': 'operate_log'}
+    realname = db.StringField()
+    operate_time =db.DateTimeField(default=datetime.now)
+    ip = db.StringField()
+    path = db.StringField()
+    operation = db.StringField()

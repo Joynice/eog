@@ -2,9 +2,9 @@
 __author__ = 'Joynice'
 from .views import bp
 import config
-from flask import session, g
+from flask import session, g, request
 from front.models import User, Log, Account
-from .models import Event_Search_Engine, Rule
+from .models import Event_Search_Engine, Rule, Operate_Log
 import datetime
 
 
@@ -31,3 +31,28 @@ def before_request():
             g.event_count = event_count
             g.rules_count = rules_count
             g.account = account
+
+@bp.after_request
+def after_request(respones):
+    '''
+    记录登陆后的操作日志，可以将不想监控的操作加入到unpath中，监控路由对应的操作在config.py的xxx中进行添加或配置相应的说明
+    例如，不想监控/xxx/ 路由
+    对/xxx/l路由进行监控，并对其添加操作说明，‘审核ID:123事件为:误报’
+    :param respones:
+    :return:
+    '''
+    path = request.path
+    ip = request.remote_addr
+    ignore_path=['/eog/events/','/eog/rules/','/eog/log/','/eog/resetpwd/','/eog/profile/','/eog/my_log/','/eog/','/eog/danger_event/','/eog/review_event/'
+                 ,'/eog/my_score/','/eog/my_review/','/eog/logout/'] # 不想被写进日志忽略的路由
+    path_and_operation_detail={'/eog/event_detail/':'查看安全事件{}详情'.format(request.form.get('event_id')),
+                               '/eog/event_suggestion/':'审核{id}事件为{status}'.format(id=request.form.get('id'),status=request.form.get('status'))
+                               } # 自定义添加被监测的日志详情说明
+    if path in ignore_path:
+        return respones
+    if config.DevelopmentConfig.CMS_USER_ID in session:
+        operate_log=Operate_Log(realname=g.eog_user.realname, ip=ip, path=path)
+        if path in path_and_operation_detail.keys():
+            operate_log.operation=path_and_operation_detail.get(path)
+        operate_log.save()
+        return respones
