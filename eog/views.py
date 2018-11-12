@@ -5,7 +5,7 @@ from utils.mongo import insert_rules, find_rules, count_rule, find_one_rules, de
 import time
 from config import Config, DevelopmentConfig
 from flask_paginate import Pagination, get_page_args, get_page_parameter
-from .models import Event_Search_Engine, Rule
+from .models import Event_Search_Engine, Rule, Operate_Log
 from .decorators import login_required
 from .forms import ResetEmailForm, ResetpwdForm, ResetUsernameForm, AddSuggesionEvent
 from utils import restful
@@ -99,12 +99,8 @@ def events():
         start = (page - 1) * Config.EVENT_PER_PAGE
         end = start + Config.EVENT_PER_PAGE
         event_count = Event_Search_Engine.objects().count()
-
         pagination = Pagination(bs_version=3, page=page, total=event_count, per_page=Config.EVENT_PER_PAGE)
         event_abstract = (Event_Search_Engine.objects)[start:end]
-        for i in event_abstract:
-            print('每一页的内容：', i)
-            print('每一页的内容的id：', i['_id'])
 
         context = {
             "event_abstract": event_abstract,
@@ -118,11 +114,8 @@ def events():
 @login_required
 def event_detail():
     event_id = request.form.get('event_id')
-
     event_abstract = (Event_Search_Engine.objects(_id=event_id).first())
-
     img_base64 = (event_abstract["img"][2:-1])
-
     return jsonify({"data": event_abstract, "img": img_base64})
 
 
@@ -134,8 +127,6 @@ def event_suggestion():
         status = form.status.data
         suggestion = form.suggestion.data
         id = form.id.data
-        print('建议', suggestion)
-
         event = Event_Search_Engine.objects(_id=id).first()
         if event:
             event.status = status
@@ -180,6 +171,27 @@ def rules():
             "rules_count": rules_count
         }
         return render_template('eog/rules.html', **context)
+
+
+@bp.route('/log/')
+@login_required
+def log():
+    '''
+#TODO(李然):添加查询时间段的功能，在 #190`Operate_Log`分页的对象换成查询时间段后的对象
+    :return:
+    '''
+    log_count =Operate_Log.objects().count()
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    start = (page - 1) * Config.LOG_PER_PAGE
+    end = start + Config.LOG_PER_PAGE
+    pagination = Pagination(bs_version=3, page=page, total=log_count, per_page=Config.LOG_PER_PAGE)
+    logs = (Operate_Log.objects.order_by('-operate_time'))[start:end]
+    context={
+        "logs":logs,
+        "pagination": pagination,
+        "log_count": log_count
+    }
+    return render_template('eog/operate_log.html',**context)
 
 
 @bp.route('/source/')

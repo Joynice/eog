@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="f932378f-6938-46d4-8947-7309ad97d12a" name="Default Changelist" comment="哈哈哈">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+=======
+    <list default="true" id="f932378f-6938-46d4-8947-7309ad97d12a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/eog/operate_log.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/rules.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/rules.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eog/hooks.py" beforeDir="false" afterPath="$PROJECT_DIR$/eog/hooks.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/eog/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/eog/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/eog/js/basic.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/eog/js/basic.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/eog/basic.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/eog/basic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/zlcache.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/zlcache.py" afterDir="false" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,10 +28,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/rules$test.coverage" NAME="test Coverage Results" MODIFIED="1541222975093" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/eog" />
-    <SUITE FILE_PATH="coverage/rules$mongo.coverage" NAME="mongo Coverage Results" MODIFIED="1539635853904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/rules$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1541125395976" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/rules$Flask__app_py_create_app_.coverage" NAME="Flask (app.py:create_app) Coverage Results" MODIFIED="1541133744429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/rules$test.coverage" NAME="test Coverage Results" MODIFIED="1541222975093" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/eog" />
+    <SUITE FILE_PATH="coverage/rules$mongo.coverage" NAME="mongo Coverage Results" MODIFIED="1539635853904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -135,6 +152,7 @@
       <usages-collector id="statistics.js.language.service.starts" />
       <usages-collector id="statistics.vcs.git.usages" />
     </session>
+<<<<<<< HEAD
     <session id="-2000535065">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
@@ -166,19 +184,55 @@
           <entry key="Markdown" value="11" />
           <entry key="Python" value="61" />
           <entry key="TypeScript" value="2" />
+=======
+    <session id="1952343416">
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="html" value="11" />
+          <entry key="js" value="5" />
+          <entry key="md" value="1" />
+          <entry key="py" value="15" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="HTML" value="11" />
+          <entry key="JavaScript" value="5" />
+          <entry key="Markdown" value="1" />
+          <entry key="Python" value="15" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.vcs.git.usages">
+        <counts>
+          <entry key="git.branch.checkout.local" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+<<<<<<< HEAD
           <entry key="html" value="862" />
           <entry key="js" value="1138" />
           <entry key="md" value="38" />
           <entry key="py" value="3580" />
           <entry key="txt" value="108" />
+=======
+          <entry key="html" value="11" />
+          <entry key="md" value="567" />
+          <entry key="py" value="110" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+<<<<<<< HEAD
           <entry key="HTML" value="862" />
           <entry key="JavaScript" value="1138" />
           <entry key="Markdown" value="38" />
@@ -299,6 +353,119 @@
         </leaf>
       </split-second>
     </splitter>
+=======
+          <entry key="HTML" value="13" />
+          <entry key="Markdown" value="565" />
+          <entry key="Python" value="110" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/eog/events.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="748">
+              <caret line="215" column="82" lean-forward="true" selection-start-line="215" selection-start-column="82" selection-end-line="215" selection-end-column="82" />
+              <folding>
+                <element signature="n#style#0;n#td#0;n#tr#5;n#tbody#0;n#table#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="7" column="32" lean-forward="true" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/exts.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/static/eog/js/basic.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="53" column="44" lean-forward="true" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/restful.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/utils/zlcache.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="3" column="13" lean-forward="true" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+              <folding>
+                <element signature="e#48#71#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eog/hooks.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1400">
+              <caret line="56" column="26" lean-forward="true" selection-start-line="56" selection-start-column="26" selection-end-line="56" selection-end-column="26" />
+              <folding>
+                <element signature="e#47#68#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/eog/basic.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="276">
+              <caret line="99" column="14" lean-forward="true" selection-start-line="99" selection-start-column="14" selection-end-line="99" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/eog/operate_log.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="30" column="37" lean-forward="true" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+              <folding>
+                <element signature="e#842#866#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eog/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="185" column="29" selection-start-line="185" selection-start-column="29" selection-end-line="185" selection-end-column="29" />
+              <folding>
+                <element signature="e#47#154#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -333,15 +500,21 @@
         <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
+<<<<<<< HEAD
     <option name="PUSH_TAGS">
       <GitPushTagMode />
     </option>
+=======
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/eog/test.py" />
         <option value="$PROJECT_DIR$/eog/__init__.py" />
+=======
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
         <option value="$PROJECT_DIR$/eog/decorators.py" />
         <option value="$PROJECT_DIR$/templates/profile.html" />
         <option value="$PROJECT_DIR$/templates/my_profile.html" />
@@ -369,16 +542,27 @@
         <option value="$PROJECT_DIR$/static/eog/js/uploadavatar.js" />
         <option value="$PROJECT_DIR$/signal.py" />
         <option value="$PROJECT_DIR$/app.py" />
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/signals.py" />
+        <option value="$PROJECT_DIR$/front/views.py" />
+        <option value="$PROJECT_DIR$/front/models.py" />
+        <option value="$PROJECT_DIR$/static/eog/js/date.js" />
+        <option value="$PROJECT_DIR$/templates/eog/my_log.html" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
         <option value="$PROJECT_DIR$/eog/forms.py" />
-        <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/static/eog/css/dashboard.css" />
         <option value="$PROJECT_DIR$/templates/eog/today_event.html" />
         <option value="$PROJECT_DIR$/modle.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/eog/models.py" />
+=======
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
         <option value="$PROJECT_DIR$/templates/common/_heads.html" />
         <option value="$PROJECT_DIR$/static/eog/js/event_detail.js" />
         <option value="$PROJECT_DIR$/templates/eog/user.html" />
         <option value="$PROJECT_DIR$/templates/eog/events.html" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/static/eog/js/account.js" />
         <option value="$PROJECT_DIR$/eog/hooks.py" />
         <option value="$PROJECT_DIR$/README.md" />
@@ -391,6 +575,17 @@
         <option value="$PROJECT_DIR$/templates/eog/my_log.html" />
         <option value="$PROJECT_DIR$/static/eog/js/date.js" />
         <option value="$PROJECT_DIR$/templates/front/signup.html" />
+=======
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/eog/models.py" />
+        <option value="$PROJECT_DIR$/eog/hooks.py" />
+        <option value="$PROJECT_DIR$/eog/views.py" />
+        <option value="$PROJECT_DIR$/utils/zlcache.py" />
+        <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/templates/eog/operate_log.html" />
+        <option value="$PROJECT_DIR$/templates/eog/basic.html" />
+        <option value="$PROJECT_DIR$/static/eog/js/basic.js" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
       </list>
     </option>
   </component>
@@ -400,11 +595,20 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+<<<<<<< HEAD
   <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="1358" />
     <option name="y" value="-8" />
+=======
+  <component name="ProjectFrameBounds">
+    <option name="x" value="263" />
+    <option name="y" value="48" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
     <option name="width" value="1616" />
-    <option name="height" value="876" />
+    <option name="height" value="884" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -419,6 +623,7 @@
         <subPane>
           <expand>
             <path>
+<<<<<<< HEAD
               <item name="eog" type="b2602c69:ProjectViewProjectNode" />
               <item name="eog" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -440,10 +645,29 @@
             <path>
               <item name="eog" type="b2602c69:ProjectViewProjectNode" />
               <item name="eog" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git" type="462c0819:PsiDirectoryNode" />
+              <item name="eog" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git" type="462c0819:PsiDirectoryNode" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="eog" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
+<<<<<<< HEAD
               <item name="eog" type="b2602c69:ProjectViewProjectNode" />
               <item name="eog" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
@@ -452,11 +676,17 @@
             </path>
             <path>
               <item name="eog" type="b2602c69:ProjectViewProjectNode" />
+=======
+              <item name="git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
               <item name="eog" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="front" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
+<<<<<<< HEAD
               <item name="eog" type="b2602c69:ProjectViewProjectNode" />
               <item name="eog" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
@@ -464,14 +694,29 @@
             <path>
               <item name="eog" type="b2602c69:ProjectViewProjectNode" />
               <item name="eog" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git" type="462c0819:PsiDirectoryNode" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="eog" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
+<<<<<<< HEAD
               <item name="eog" type="b2602c69:ProjectViewProjectNode" />
               <item name="eog" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="front" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
             </path>
           </expand>
           <select />
@@ -490,19 +735,19 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\L R\Desktop\rules\static\common" />
-      <recent name="C:\Users\L R\Desktop\rules\static\eog\css" />
-      <recent name="C:\Users\L R\Desktop\rules\static\eog" />
-      <recent name="C:\Users\L R\Desktop\rules\static\eog\js" />
-      <recent name="C:\Users\L R\Desktop\rules\static\eog\js\" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\L R\Desktop\rules\static\js" />
       <recent name="C:\Users\L R\Desktop\rules\static\css" />
       <recent name="C:\Users\L R\Desktop\rules\static\eog\css" />
       <recent name="C:\Users\L R\Desktop\rules\static\eog\js" />
       <recent name="C:\Users\L R\Desktop\rules\static\eog\img\user" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Drops\Desktop\git\templates\eog" />
+      <recent name="C:\Users\L R\Desktop\rules\static\common" />
+      <recent name="C:\Users\L R\Desktop\rules\static\eog\css" />
+      <recent name="C:\Users\L R\Desktop\rules\static\eog" />
+      <recent name="C:\Users\L R\Desktop\rules\static\eog\js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -577,7 +822,7 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Flask (app.py:create_app)" type="Python.FlaskServer" factoryName="Flask server" temporary="true" nameIsGenerated="true">
+    <configuration name="Flask (app.py)" type="Python.FlaskServer" factoryName="Flask server" temporary="true" nameIsGenerated="true">
       <option name="application" value="create_app" />
       <module name="rules" />
       <option name="target" value="$PROJECT_DIR$/app.py" />
@@ -610,15 +855,18 @@
     </configuration>
     <list>
       <item itemvalue="Flask server.rules" />
-      <item itemvalue="Flask server.Flask (app.py)" />
       <item itemvalue="Python.mongo" />
-      <item itemvalue="Flask server.Flask (app.py:create_app)" />
+      <item itemvalue="Flask server.Flask (app.py)" />
       <item itemvalue="Python.test" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.test" />
+<<<<<<< HEAD
         <item itemvalue="Flask server.Flask (app.py:create_app)" />
+=======
+        <item itemvalue="Flask server.Flask (app.py)" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
         <item itemvalue="Python.mongo" />
         <item itemvalue="Flask server.Flask (app.py)" />
         <item itemvalue="Python.test" />
@@ -681,10 +929,26 @@
     <option name="localTasksCounter" value="7" />
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="1358" y="-8" width="1616" height="876" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22686376" />
+=======
+    <frame x="331" y="160" width="1616" height="884" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19344473" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -693,13 +957,19 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32933334" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49871466" weight="0.32928476" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+<<<<<<< HEAD
       <window_info active="true" anchor="bottom" id="Event Log" order="10" sideWeight="0.50192803" side_tool="true" visible="true" weight="0.26990554" />
       <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49807197" visible="true" weight="0.26990554" />
       <window_info anchor="bottom" id="Python Console" order="12" />
+=======
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3295082" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32533333" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32884097" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
       <window_info anchor="right" id="Mongo Explorer" order="0" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
@@ -750,6 +1020,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="完成账号信息、前端注册转登录" />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/static/eog/img/user/woshiliran@foxmail.com.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -774,12 +1045,16 @@
       </provider>
     </entry>
     <entry file="file://F:/Python/Python36-32/Lib/site-packages/mongoengine/base/metaclasses.py">
+=======
+    <entry file="file://$PROJECT_DIR$/static/common/sweetalert/zlalert.js">
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3">
           <caret line="376" column="22" selection-start-line="376" selection-start-column="22" selection-end-line="376" selection-end-column="22" />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/front/forms.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="28">
@@ -807,6 +1082,26 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/common/views.py">
+=======
+    <entry file="file://$PROJECT_DIR$/static/eog/img/user/woshiliran@foxmail.com.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/eog/img/user/woshiliran@foxmail.com.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://F:/Python/Python36-32/Lib/site-packages/blinker/base.py" />
+    <entry file="file://$PROJECT_DIR$/templates/eog/my_setting.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="40" column="8" lean-forward="true" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/eog/js/jquery.min.js" />
+    <entry file="file://$PROJECT_DIR$/static/eog/css/style.css" />
+    <entry file="file://$PROJECT_DIR$/static/eog/js/wui-date.js" />
+    <entry file="file://$PROJECT_DIR$/static/eog/js/resetpwd.js">
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1" />
       </provider>
@@ -854,6 +1149,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/modle.py" />
     <entry file="file://$PROJECT_DIR$/templates/eog/today_event.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -886,6 +1182,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1048">
           <caret line="205" lean-forward="true" selection-start-line="205" selection-end-line="205" />
+=======
+    <entry file="file://F:/Python/Python36-32/Lib/site-packages/mongoengine/base/metaclasses.py" />
+    <entry file="file://$PROJECT_DIR$/static/eog/js/date.js" />
+    <entry file="file://$PROJECT_DIR$/front/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="128" column="72" lean-forward="true" selection-start-line="128" selection-start-column="72" selection-end-line="128" selection-end-column="72" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
         </state>
       </provider>
     </entry>
@@ -896,6 +1200,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/static/eog/js/uploadavatar.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -923,12 +1228,23 @@
         <state relative-caret-position="240">
           <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
         </state>
+=======
+    <entry file="file://F:/Python/Python36-32/Lib/site-packages/flask/globals.py" />
+    <entry file="file://$PROJECT_DIR$/common/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/eog/js/basic.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="1260">
           <caret line="63" column="3" selection-start-line="63" selection-start-column="3" selection-end-line="63" selection-end-column="3" />
+=======
+        <state relative-caret-position="60">
+          <caret line="3" column="16" lean-forward="true" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
         </state>
       </provider>
     </entry>
@@ -941,8 +1257,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/eog/events.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="680">
           <caret line="34" column="47" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="47" />
+=======
+        <state relative-caret-position="-50">
+          <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
         </state>
       </provider>
     </entry>
@@ -956,11 +1277,21 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/static/eog/js/detail.js">
       <provider selected="true" editor-type-id="text-editor" />
+=======
+    <entry file="file://$PROJECT_DIR$/templates/eog/my_log.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2060">
+          <caret line="103" column="12" selection-start-line="103" selection-start-column="12" selection-end-line="103" selection-end-column="12" />
+        </state>
+      </provider>
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
     </entry>
     <entry file="file://$PROJECT_DIR$/static/eog/js/event_detail.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="475">
           <caret line="87" column="19" selection-start-line="87" selection-start-column="19" selection-end-line="87" selection-end-column="19" />
         </state>
@@ -970,6 +1301,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="13" column="14" lean-forward="true" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+=======
+        <state relative-caret-position="40">
+          <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
         </state>
       </provider>
     </entry>
@@ -980,6 +1315,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/eog/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20">
@@ -987,11 +1323,33 @@
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/modle.py" />
+    <entry file="file://$PROJECT_DIR$/templates/eog/today_event.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/eog/js/event_detail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2175">
+          <caret line="87" column="19" selection-start-line="87" selection-start-column="19" selection-end-line="87" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/common/_heads.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="12" column="37" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/eog/my_profile.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="380">
           <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
         </state>
@@ -1022,40 +1380,107 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-200">
           <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eog/hooks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="27" column="29" lean-forward="true" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
-          <folding>
-            <element signature="e#47#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+=======
+        <state relative-caret-position="1350">
+          <caret line="54" column="37" selection-start-line="54" selection-start-column="37" selection-end-line="54" selection-end-column="37" />
           <folding>
             <element signature="e#47#66#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/eog/user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="16" column="39" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://F:/PythonProject/venv/Lib/site-packages/wtforms/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/signals.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-169">
+          <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="655">
+            <caret line="44" column="60" selection-start-line="44" selection-start-column="60" selection-end-line="44" selection-end-column="60" />
+          </first_editor>
+          <second_editor />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eog/hooks.py">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="351">
+          <caret line="27" column="29" lean-forward="true" selection-start-line="27" selection-start-column="29" selection-end-line="27" selection-end-column="29" />
+=======
+        <state relative-caret-position="153">
+          <caret line="84" column="26" lean-forward="true" selection-start-line="84" selection-start-column="26" selection-end-line="84" selection-end-column="26" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
+          <folding>
+            <element signature="e#47#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/front/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+          <folding>
+            <element signature="e#47#66#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/eog/hooks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1400">
+          <caret line="56" column="26" lean-forward="true" selection-start-line="56" selection-start-column="26" selection-end-line="56" selection-end-column="26" />
+          <folding>
+            <element signature="e#47#68#0" expanded="true" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/eog/views.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="491">
           <caret line="372" column="56" lean-forward="true" selection-start-line="372" selection-start-column="56" selection-end-line="372" selection-end-column="56" />
           <folding>
             <element signature="e#47#154#0" expanded="true" />
             <marker date="1542020132132" expanded="true" signature="10575:10634" ph="..." />
+=======
+        <state relative-caret-position="200">
+          <caret line="185" column="29" selection-start-line="185" selection-start-column="29" selection-end-line="185" selection-end-column="29" />
+          <folding>
+            <element signature="e#47#154#0" expanded="true" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/static/eog/js/delete.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -1074,17 +1499,75 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="191">
           <caret line="91" column="15" lean-forward="true" selection-start-line="91" selection-start-column="15" selection-end-line="91" selection-end-column="15" />
+=======
+    <entry file="file://$PROJECT_DIR$/exts.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/restful.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/zlcache.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="3" column="13" lean-forward="true" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+          <folding>
+            <element signature="e#48#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="7" column="32" lean-forward="true" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/eog/operate_log.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="30" column="37" lean-forward="true" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
+          <folding>
+            <element signature="e#842#866#0#HTML" expanded="true" />
+          </folding>
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/front/signup.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="140">
           <caret line="27" column="104" selection-start-line="27" selection-start-column="104" selection-end-line="27" selection-end-column="104" />
           <folding>
             <element signature="n#style#0;n#h6#0;n#div#0;n#body#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
           </folding>
+=======
+        <state relative-caret-position="748">
+          <caret line="215" column="82" lean-forward="true" selection-start-line="215" selection-start-column="82" selection-end-line="215" selection-end-column="82" />
+          <folding>
+            <element signature="n#style#0;n#td#0;n#tr#5;n#tbody#0;n#table#0;n#div#0;n#div#2;n#div#0;n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/eog/basic.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="99" column="14" lean-forward="true" selection-start-line="99" selection-start-column="14" selection-end-line="99" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/eog/js/basic.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="53" column="44" lean-forward="true" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
+>>>>>>> a5fb820cfdea33f13bcc2b5024cbc30ef3dc57de
         </state>
       </provider>
     </entry>

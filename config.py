@@ -2,6 +2,15 @@ class Config(object):
     SECRET_KEY = 'hard_word'
     EVENT_PER_PAGE = 15
     RULE_PER_PAGE = 7
+    LOG_PER_PAGE = 19
+
+    # REDIS 数据库配置
+    REDIS_HOST = '192.168.0.119'
+    REDIS_PORT = 6379
+    REDIS_TASK_DB = 1
+    REDIS_PASSWORD = ''
+    REDIS_DECODE_RESPONSES = True
+    REDIS_ENCODING = 'utf-8'
 
 
 class DevelopmentConfig(Config):
@@ -34,3 +43,4 @@ config = {
     'prodection': ProductionConfig,
     'default': DevelopmentConfig
 }
+

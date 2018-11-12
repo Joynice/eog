@@ -1,0 +1,11 @@
+# Byte-compiled / optimized / DLL files
+# Python:
+*.py[cod]
+*.so
+*.egg
+*.egg-info
+dist
+build
+__pycache__/
+
+# 这是一个忽略上传的文件

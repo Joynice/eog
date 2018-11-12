@@ -48,13 +48,13 @@ $(function () {
     }else if(url.indexOf('index2') >= 0) {
         var index2ManageLi = $('.index2');
         index2ManageLi.addClass('active').siblings().removeClass('active');
-    }else if(url.indexOf("my_log") >= 0){
-        var mylogeManageLi = $(".my_log");
+    }else if(url.indexOf("log") >= 0){
+        var mylogeManageLi = $(".operate_log");
         mylogeManageLi.addClass('active').siblings().removeClass('active');
     }else if(url.indexOf("my_review") >= 0){
         var my_reviewManageLi = $(".my_review");
         my_reviewManageLi.addClass('active').siblings().removeClass('active');
-    }else if(url.indexOf("my_score") >= 0){
+    }else if(url.indexOf("operate_log") >= 0){
         var my_scoreManageLi = $(".my_score");
         my_scoreManageLi.addClass('active').siblings().removeClass('active');
     }else if(url.indexOf("user") >= 0){
