@@ -1,0 +1,43 @@
+{% extends 'eog/basic.html' %}
+
+{% block title %}
+    操作日志
+{% endblock %}
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+    <h2>操作日志</h2>
+    <table class="table table-striped table-hover table-bordered table-condensed ">
+        <thead>
+        <tr>
+            <th><input type="checkbox"/></th>
+            <th>用户名</th>
+            <th>角色</th>
+            <th>时间</th>
+            <th>ip</th>
+            <th>path</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for log in logs %}
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>{{ log.realname }}</td>
+                <td>安全专家</td>
+                <td>{{ log.operate_time.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                <td>{{ log.ip }}</td>
+                <td>{{ log.path }}</td>
+                <td>{{ log.operation }}</td>
+            </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+        <div style="text-align: center">
+            {{ pagination.links }}
+        </div>
+{% endblock %}
