@@ -33,6 +33,9 @@
 
   <body>
   <h2 style="text-align: center; padding-top: 50px; padding-bottom: 10px">重置密码</h2>
+  <div>
+      <h6 style="padding-left: 860px; margin-bottom: 0px; margin-top: 10px; margin-bottom: 10px"><a href={{ url_for('front.login') }}>已有账号，立即登录</a></h6>
+  </div>
   <div style="padding-left: 35%; padding-right: 35%">
     <form action="" method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
@@ -46,7 +49,7 @@
             </div>
             <div class="form-group">
                 <div class="input-group">
-                    <span class="input-group-addon">邮箱验证码</span>
+                    <span class="input-group-addon">验证码</span>
                     <input class="form-control" name="captcha" placeholder="请输入邮箱验证码">
                 </div>
             </div>
@@ -62,8 +65,9 @@
                     <input type="password" class="form-control" name="newpwd2" placeholder="请确认新密码">
                 </div>
             </div>
-            <div class="form-group" style="padding-left: 140px">
-                <button class="btn btn-primary" id="submit" style="margin-right: 50px">立即重置</button>
+            <div class="form-group" style="padding-left: 185px; margin-top: 10px">
+                <button class="btn btn-primary" id="submit">立即重置</button>
+
             </div>
         </div>
     </form>
