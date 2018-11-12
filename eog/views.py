@@ -5,13 +5,13 @@ from utils.mongo import insert_rules, find_rules, count_rule, find_one_rules, de
 import time
 from config import Config, DevelopmentConfig
 from flask_paginate import Pagination, get_page_args, get_page_parameter
-from .models import Event_Search_Engine,Rule
+from .models import Event_Search_Engine, Rule
 from .decorators import login_required
 from .forms import ResetEmailForm, ResetpwdForm, ResetUsernameForm, AddSuggesionEvent
 from utils import restful
 from front.models import User, Log
 import os
-from signals import logout_signal
+from signals import logout_signal, account_signal
 from datetime import datetime
 
 bp = Blueprint('eog', __name__, url_prefix='/eog')
@@ -102,41 +102,43 @@ def events():
         pagination = Pagination(bs_version=3, page=page, total=event_count, per_page=Config.EVENT_PER_PAGE)
         event_abstract = (Event_Search_Engine.objects)[start:end]
         for i in event_abstract:
-            print('每一页的内容：',i)
-            print('每一页的内容的id：',i['_id'])
+            print('每一页的内容：', i)
+            print('每一页的内容的id：', i['_id'])
 
         context = {
             "event_abstract": event_abstract,
             "pagination": pagination,
-            "event_count":event_count,
+            "event_count": event_count,
         }
         return render_template('eog/events.html', **context)
 
-@bp.route('/event_detail/',methods=['POST'])
+
+@bp.route('/event_detail/', methods=['POST'])
 @login_required
 def event_detail():
-    event_id =request.form.get('event_id')
+    event_id = request.form.get('event_id')
 
     event_abstract = (Event_Search_Engine.objects(_id=event_id).first())
 
     img_base64 = (event_abstract["img"][2:-1])
 
-    return jsonify({"data":event_abstract,"img":img_base64})
+    return jsonify({"data": event_abstract, "img": img_base64})
 
-@bp.route('/event_suggestion/',methods=['POST'])
+
+@bp.route('/event_suggestion/', methods=['POST'])
 def event_suggestion():
-    form= AddSuggesionEvent(request.form)
-    print('上传数据',request.form)
+    form = AddSuggesionEvent(request.form)
+    print('上传数据', request.form)
     if form.validate():
-        status=form.status.data
-        suggestion=form.suggestion.data
-        id=form.id.data
-        print('建议',suggestion)
+        status = form.status.data
+        suggestion = form.suggestion.data
+        id = form.id.data
+        print('建议', suggestion)
 
         event = Event_Search_Engine.objects(_id=id).first()
         if event:
-            event.status=status
-            event.suggestion=suggestion
+            event.status = status
+            event.suggestion = suggestion
             event.save()
             return restful.success()
         else:
@@ -160,7 +162,6 @@ def danger_event():
 @bp.route('/rules/')
 @login_required
 def rules():
-
     if request.method == 'GET':
         rules_count = Rule.objects().count()
         page = request.args.get(get_page_parameter(), type=int, default=1)
@@ -184,12 +185,6 @@ def rules():
 @login_required
 def source():
     return render_template('eog/source.html')
-
-
-# @bp.route('/my_log/')
-# @login_required
-# def my_log():
-#     return render_template('eog/my_log.html')
 
 
 @bp.route('/my_review/')
@@ -235,6 +230,8 @@ class LogView(views.MethodView):
             today = date + ' ' + '0:00:00'
             log = Log.objects(today=today, handler=g.eog_user.email).all()
             print(log)
+            for i in log:
+                print(i.login_time)
             if not log:
                 print(111)
                 return restful.params_error(message='没有找到当天的登录信息！')
@@ -324,7 +321,23 @@ class UploadavatarView(views.MethodView):
         file.save(file_path)
         g.eog_user.avatar_path = '/static/eog/img/user/' + filename
         g.eog_user.save()
+        NowTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        account_signal.send(operate_time=NowTime, ip=request.remote_addr,)
         return restful.success('修改头像成功！')
+
+
+class AccountView(views.MethodView):
+    decorators = [login_required]
+
+    def get(self):
+        return render_template('eog/my_log.html')
+
+    def post(self):
+        dict = {}
+        tag_id = request.form.get('tag_id')
+        date = request.form.get('date')
+        dict[tag_id] = date
+        print(dict)
 
 
 @bp.route('/remove/')
@@ -340,6 +353,7 @@ def remove():
         return restful.params_error('传参错误！')
 
 
+bp.add_url_rule('/account/', view_func=AccountView.as_view('account'))
 bp.add_url_rule('/resetpwd/', view_func=ResetPWView.as_view('resetpwd'))
 bp.add_url_rule('/resetmail/', view_func=ResetEmailView.as_view('resetmail'))
 bp.add_url_rule('/profile/', view_func=UploadavatarView.as_view('profile'))

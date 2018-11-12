@@ -3,6 +3,7 @@
 {% block title %}
     操作日志
 {% endblock %}
+
 {% block head %}
 {% endblock %}
 
@@ -12,7 +13,7 @@
     <h6 style="margin-top: 5px; margin-bottom: 5px">选择日期：</h6>
     <input type="date" id="fname" name="date" onchange="upperCase(this.id)">
     {% set logs = g.all_log %}
-    <table class="table table-bordered" style=" margin-top: 10px" id="submit">
+    <table class="table table-bordered" style=" margin-top: 10px; border: 1px" id="submit">
         <tr>
             <th>登录时间：</th>
             <th>登出时间：</th>
@@ -25,7 +26,7 @@
                     <td>{{ log.login_time }}</td>
                     <td></td>
                     <td>{{ log.ip }}</td>
-                    <td></td>
+                    <td>当前在线</td>
                     </tr>
                 {% else %}
                     <tr id="domo">
@@ -40,8 +41,9 @@
         </tbody>
     </table>
     <script type="text/javascript">
-        function timeStamp2String(time) {
+        function timeStamp2String(time1) {
             var datetime = new Date();
+            var time = time1-8*60*60*1000;
             datetime.setTime(time);
             var year = datetime.getFullYear();
             var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
@@ -63,6 +65,7 @@
                 'success': function (data) {
                     if (data['code'] == 200) {
                         var logList = data['data'];
+                        console.log(data['data']);
                         $("tr#domo").hide();
                         var html = "";
                         for (var i = 0; i < logList.length; i++) {
@@ -76,7 +79,7 @@
                         $(".center").html(html);
                         setTimeout(function () {
                             zlalert.alertSuccessToast('加载成功！');
-                        }, 1000);
+                        }, 100);
 
                     }else{
                         zlalert.alertInfo(data['message']);
@@ -93,7 +96,7 @@
     <h4 style="margin-top: 20px">账号信息</h4>
     <h6 style="margin-bottom: 5px">选择日期</h6>
     <div>
-    <input type="date" id="date1"><span>——</span><input type="date" id="date2">
+    <input type="date" id="date1" onchange="account(this.id)"><span>—→</span><input type="date" id="date2" onchange="account(this.id)">
     <table class="table table-bordered" style=" margin-top: 10px" id="submit1">
         <tr>
             <th>操作时间：</th>
@@ -102,5 +105,24 @@
             <th>是否本人操作：</th>
         </tr>
     </table>
+
     </div>
+    <script>
+       function account(x) {
+           var y = document.getElementById(x).value;
+           console.log(y);
+           zlajax.post({
+               'url': '/eog/account/',
+               'data':{
+                   'tag_id': x,
+                   'date': y,
+               },
+               'success':function (data) {
+                   if(data['code']==200){
+                       var dateList = data['data']
+                   }
+               }
+           })
+       }
+    </script>
 {% endblock %}

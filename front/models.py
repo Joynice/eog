@@ -24,8 +24,10 @@ class User(db.Document):
     avatar_path = db.StringField(required=False)
 
     def avatar(self):
-        print(sep+'static'+sep+'eog'+sep+'img'+sep+'default'+sep+random.choice(os.listdir('./static/eog/img/default/')))
-        return sep+'static'+sep+'eog'+sep+'img'+sep+'default'+sep+random.choice(os.listdir('./static/eog/img/default/'))
+        print(sep + 'static' + sep + 'eog' + sep + 'img' + sep + 'default' + sep + random.choice(
+            os.listdir('./static/eog/img/default/')))
+        return sep + 'static' + sep + 'eog' + sep + 'img' + sep + 'default' + sep + random.choice(
+            os.listdir('./static/eog/img/default/'))
     # def __init__(self, *args, **kwargs):
     #     if 'password' in kwargs:
     #         self.password = kwargs.get('password')
@@ -46,7 +48,7 @@ class User(db.Document):
 
 class Log(db.Document):
     '''
-    用户日志： 登录时间，登出时间，登录ip
+    用户日志： 登录时间，登出时间，登录ip,登录日期
     todo:
     记录审核日志
     '''
@@ -56,4 +58,18 @@ class Log(db.Document):
     ip = db.StringField(required=True)
     login_time = db.DateTimeField(required=False)
     logout_time = db.DateTimeField(required=False)
-    today = db.DateTimeField(requried=False, default=datetime.datetime.now().strftime('%Y-%m-%d'))
+    today = db.DateTimeField(requried=False)
+
+
+class Account(db.Document):
+    """
+    用户账号：操作时间、操作ip、具体操作、是否本人操作、操作日期
+    """
+    meta = {'collection': 'account'}
+    _id = db.StringField(default=shortuuid.uuid)
+    operator = db.StringField(required=False)
+    ip = db.StringField(required=False)
+    today = db.DateTimeField(required=False)
+    operate_time = db.DateTimeField(required=False)
+    operate_detail = db.StringField(required=False)
+    self = db.StringField(chices=['是', '否', '未知'], default='未知')

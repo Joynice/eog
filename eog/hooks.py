@@ -3,7 +3,7 @@ __author__ = 'Joynice'
 from .views import bp
 import config
 from flask import session, g
-from front.models import User, Log
+from front.models import User, Log, Account
 from .models import Event_Search_Engine, Rule
 import datetime
 
@@ -19,9 +19,15 @@ def before_request():
         all_today_log = Log.objects(handler=user.email,
                                     today=str(datetime.datetime.now().strftime('%Y-%m-%d')) + ' ' + '0:00:00').order_by(
             '-login_time').all()
+        account = Account.objects(operator=user.email,
+                                  operate_time__gte=(datetime.datetime.now() - datetime.timedelta(days=7)).strftime(
+                                      "%Y-%m-%d %H:%M:%S"),
+                                  operate_time__lt=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")).order_by(
+            '-operate_time').all()
         if user:
             g.eog_user = user
             g.user_log = log
             g.all_log = all_today_log
             g.event_count = event_count
             g.rules_count = rules_count
+            g.account = account
