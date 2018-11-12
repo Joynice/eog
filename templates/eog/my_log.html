@@ -5,10 +5,11 @@
 {% endblock %}
 
 {% block head %}
+    <script src="{{ static('eog/js/date.js') }}"></script>
 {% endblock %}
 
 {% block main %}
-    <h2 style="padding-bottom: 10px; padding-top: 25px">操作日志</h2>
+    <h2 style="padding-bottom: 10px; padding-top: 25px">账号日志</h2>
     <h4>登录信息</h4>
     <h6 style="margin-top: 5px; margin-bottom: 5px">选择日期：</h6>
     <input type="date" id="fname" name="date" onchange="upperCase(this.id)">
@@ -96,33 +97,25 @@
     <h4 style="margin-top: 20px">账号信息</h4>
     <h6 style="margin-bottom: 5px">选择日期</h6>
     <div>
-    <input type="date" id="date1" onchange="account(this.id)"><span>—→</span><input type="date" id="date2" onchange="account(this.id)">
+    <input type="date" id="date1" /><span>—→</span><input type="date" id="date2" />
+        <button class="btn btn-primary" type="submit" id="query" style="padding-top: 4px; padding-bottom: 4px; padding-right: 8px; padding-left: 8px; margin-left: 8px">查询</button>
+    {% set accounts = g.account  %}
     <table class="table table-bordered" style=" margin-top: 10px" id="submit1">
         <tr>
             <th>操作时间：</th>
             <th>操作IP：</th>
             <th>具体操作：</th>
-            <th>是否本人操作：</th>
         </tr>
+        {% for account in accounts %}
+        <tr id="account">
+            <td>{{ account.operate_time }}</td>
+            <td>{{ account.ip }}</td>
+            <td>{{ account.operate_detail }}</td>
+        </tr>
+        {% endfor %}
+    <tbody class="center1">
+    </tbody>
     </table>
 
     </div>
-    <script>
-       function account(x) {
-           var y = document.getElementById(x).value;
-           console.log(y);
-           zlajax.post({
-               'url': '/eog/account/',
-               'data':{
-                   'tag_id': x,
-                   'date': y,
-               },
-               'success':function (data) {
-                   if(data['code']==200){
-                       var dateList = data['data']
-                   }
-               }
-           })
-       }
-    </script>
 {% endblock %}
