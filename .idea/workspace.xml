@@ -592,7 +592,6 @@
     </configuration>
     <list>
       <item itemvalue="Flask server.rules" />
-      <item itemvalue="Flask server.Flask (app.py)" />
       <item itemvalue="Python.mongo" />
       <item itemvalue="Flask server.Flask (app.py)" />
       <item itemvalue="Python.test" />
