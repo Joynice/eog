@@ -1,0 +1,56 @@
+{% extends 'eog/basic.html' %}
+
+
+{% block title %}
+    个人信息
+{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-fileinput/4.4.6/css/fileinput.min.css"/>
+    <script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.6/js/fileinput.min.js"></script>
+    <script src="{{ static('/eog/js/uploadavatar.js') }}"></script>
+
+{% endblock %}
+
+{% block main %}
+    <h2 style="padding-bottom: 25px; padding-top: 25px">个人信息：</h2>
+
+    {% set user = g.eog_user %}
+    <table class="table table-bordered" style="text-align: center;">
+        <tbody class="center">
+        <tr>
+            <td>用户名：</td>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <td>真实姓名：</td>
+            <td>{{ user.realname }}</td>
+
+        </tr>
+        <tr>
+            <td>邮箱：</td>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <td>当前登录IP：</td>
+            <td>{{ user_ip }}</td>
+
+        </tr>
+        <tr>
+            <td>加入时间：</td>
+            <td>{{ user.join_time }}</td>
+        </tr>
+
+        <tr style="margin-bottom: 10px">
+            <td style="padding-top: 15px">更换头像：</td>
+            <td>
+                <form id="uploadForm" class="avatar-input-form" method="POST"
+                      enctype="multipart/form-data" style="padding-left: 150px; padding-right: 150px; padding-top: 5px">
+                    <input name="avatar_upload" type="file" class="file" data-show-preview="true"/>
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"></input>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

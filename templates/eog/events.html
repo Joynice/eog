@@ -1,0 +1,325 @@
+{% extends 'eog/basic.html' %}
+
+{% block title %}
+    安全事件
+{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{{ static("eog/css/modal.css") }}">
+    <script src="{{ static("eog/js/event_detail.js") }}"></script>
+{% endblock %}
+
+{% block main %}
+    <h2>安全事件</h2>
+    <p>安全事件</p>
+    <div class="table-modal">
+        <table class="table table-striped table-hover table-bordered table-condensed ">
+            <thead>
+            <tr>
+                <th><input type="checkbox" /></th>
+                <th>num</th>
+                <th>ID</th>
+                <th>单位</th>
+                <th>域名</th>
+                <th>来源</th>
+                <th>最近发现</th>
+                <th>等级</th>
+                <th>状态</th>
+                <th>详情/快照</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for event in event_abstract %}
+                <tr class="default" data-_id='{{ event._id }}' data-id='{{ event.id }}'>
+                    <td><input type="checkbox"/></td>
+                    <td>{{ event['_id'] }}</td>
+                    <td>{{ event['id'] }}</td>
+                    <td>Null</td>
+                    <td>{{ event['domain'] }}</td>
+                    <td>{{ event['_from'] }}</td>
+                    <td>{{ (event['first_time']) }}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-xs">高危</button>
+                    </td>
+                    <td>
+                        {% if event['status']== '未审核' %}
+                            <button type="button" class="btn btn-warning btn-xs">{{ event['status'] }}</button>
+                        {% elif event['status']== '误报' %}
+                            <button type="button" class="btn btn-success btn-xs">{{ event['status'] }}</button>
+                        {% else %}
+                            <button type="button" class="btn btn-danger btn-xs">{{ event['status'] }}</button>
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        <div>
+                            <button class="btn btn-info btn-xs edit-event-btn" data-type="event-edit"
+                                    data-toggle="modal" data-target=".bs-example-modal-lg"><i
+                                    class="fa fa-pencil fa-fw" data-toggle="tooltip" title="事件详情"></i></button>
+                            {#                            <button class="btn btn-success btn-xs detail-event-btn" data-type="event-detail"#}
+                            {#                                    data-toggle="modal" data-target=".bs-example-modal-lg"><i#}
+                            {#                                    class="fa fa-eye fa-fw"></i></button>#}
+                            {#                            <button class="btn btn-danger btn-xs delete-event-btn" data-type="event-delete"><i#}
+                            {#                                    class="fa fa-trash fa-fw"></i></button>#}
+                            /
+                            <button class="btn btn-info btn-xs edit-event-btn" data-type="event-img"><i
+                                    class="fa fa-file-picture-o" aria-hidden="true" data-toggle="tooltip"
+                                    title="快照"></i></button>
+                        </div>
+                    </td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <script>
+
+            //查找thead下第一个th下的input
+            var chbAll = document.querySelector(
+                "thead th:first-child>input"
+            );
+            //查找tbody中所有第一个td下的input
+            var chbs = document.querySelectorAll(
+                "tbody td:first-child>input"
+            );
+            //为chbAll绑定单击事件
+            chbAll.onclick = function () {
+                //遍历chbs中每个chb
+                for (var i = 0; i < chbs.length; i++) {
+                    //设置当前chb的checked等于this的checked
+                    chbs[i].checked = this.checked;
+                }
+            };
+            //为chbs中每chb都绑定单击事件
+            for (var i = 0; i < chbs.length; i++) {
+                chbs[i].onclick = function () {
+                    if (!this.checked)
+                        chbAll.checked = false;
+                    else {
+                        //选择tbody下第一个td中的未选中的input
+                        var unchecked =
+                            document.querySelector(
+                                "tbody td:first-child>input:not(:checked)"
+                            );
+                        if (unchecked === null)
+                            chbAll.checked = true;
+                    }
+                }
+            }
+        </script>
+        <div style="text-align: center">
+            {{ pagination.links }}
+        </div>
+        {#    模态框#}
+
+        <!-- Modal -->
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">安全事件详情</h4>
+
+                    </div>
+                    <div class="modal-body " id="modal_body">
+                        {# 模态框中的布局#}
+                        <div class="row ">
+                            {#左边的模态框#}
+
+
+                            <div class="col-md-4 " id="modal_left" style="border-right: 1px solid #444444">
+                                <div id="dowebok">
+                                    <img src="" data-original="" name="event_img"
+                                         style="width: 100% ;max-height: 500px;overflow: hidden"
+                                         alt="可放大的事件快照" class="img-rounded">
+                                </div>
+                                <table class="table table-striped table-hover table-bordered table-condensed "
+                                       style="margin-top:20px ">
+                                    <thead>
+                                    <tr>
+
+                                        <th>审核人</th>
+                                        <th>时间</th>
+                                        <th>结果</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>俊杰</td>
+                                        <td>2018-11-1 12:01:30</td>
+                                        <td>误报</td>
+                                    </tr>
+                                    <tr>
+                                        <td>俊杰</td>
+                                        <td>2018-11-1 12:01:30</td>
+                                        <td>误报</td>
+                                    </tr>
+                                    <tr>
+                                        <td>俊杰</td>
+                                        <td>2018-11-1 12:01:30</td>
+                                        <td>误报</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>俊杰</td>
+                                        <td>2018-11-1 12:01:30</td>
+                                        <td>误报</td>
+                                    </tr>
+                                    <tr>
+                                        <td>俊杰</td>
+                                        <td>2018-11-1 12:01:30</td>
+                                        <td>误报</td>
+                                    </tr>
+                                    <tr>
+                                        <td>俊杰</td>
+                                        <td>2018-11-1 12:01:30</td>
+                                        <td>误报</td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+
+                                写一个
+
+                            </div>
+                            <div class="clearfix visible-xs-block"></div>
+                            {#                            右边的模态框#}
+                            <div class="col-md-8" id="modal_right">
+                                <div class="table-responsive">
+                                    <table class="table table-hover ">
+                                        <tbody>
+
+
+                                        <tr>
+                                            <td style="font-weight:bold">ID</td>
+                                            <td id="event_id">100</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight:bold">单位</td>
+                                            <td>null</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight:bold">域名</td>
+                                            <td><a target="_blank" name="a_herf">http://www.baidu.com</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight:bold">设置分配的ID</td>
+                                            <td id="id">未完成分配ID功能</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="font-weight:bold">任务ID</td>
+                                            <td id="job_id"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight:bold">首次发现</td>
+                                            <td id="first_time"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight:bold">关键字</td>
+                                            <td id="keyword"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight:bold">详情</td>
+                                            <td><a id="event_url" target="_blank" href=""></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight:bold">匹配规则</td>
+                                            <td> jdjbnal
+                                                <button class="btn btn-primary btn-xs" type="button"
+                                                        data-toggle="collapse"
+                                                        data-target="#collapseExample " aria-expanded="true"
+                                                        aria-controls="collapseExample ">
+                                                    详情
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr class="collapse" id="collapseExample">
+                                            <td>
+                                                规则
+                                            </td>
+                                            <td>
+                                                sjkahd&*hbsdkajfhO*hl
+
+                                            </td>
+                                        </tr>
+                                        <tr class="collapse" id="collapseExample">
+                                            <td>
+                                                修复建议
+                                            </td>
+                                            <td>
+                                                了多久啊数
+                                            </td>
+                                        </tr>
+                                        <tr class="collapse" id="collapseExample">
+                                            <td>
+                                                萨达sdfsd
+                                            </td>
+                                            <td>
+                                                了多久啊数
+                                            </td>
+                                        </tr>
+                                        <tr class="collapse" id="collapseExample">
+                                            <td>
+                                                萨达sdfsd
+                                            </td>
+                                            <td>
+                                                了多久啊数
+                                            </td>
+                                        </tr>
+                                        <tr class="collapse" id="collapseExample">
+                                            <td>
+                                                萨达sdfsd
+                                            </td>
+                                            <td>
+                                                了多久啊数
+                                            </td>
+                                        </tr>
+
+                                        <tr class="success">
+                                            <td style="font-weight:bold">审核状态</td>
+                                            <td id="status">未审核</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <form class="form-horizontal" id="event-dialog">
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">审核结果</div>
+                                        <select class="form-control " name="select" required>
+                                            <option></option>
+                                            <option value="误报">误报</option>
+                                            <option value="确认事件">确认事件</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">专家建议</div>
+                                        <textarea class="form-control" rows="4" required name="suggestion"></textarea>
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" id="save-suggestion-btn">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}
+
+

@@ -1,0 +1,128 @@
+{% extends 'eog/basic.html' %}
+
+{% block title %}
+    操作日志
+{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block main %}
+    <h2 style="padding-bottom: 10px; padding-top: 25px">操作日志</h2>
+    <h4>登录信息</h4>
+    <h6 style="margin-top: 5px; margin-bottom: 5px">选择日期：</h6>
+    <input type="date" id="fname" name="date" onchange="upperCase(this.id)">
+    {% set logs = g.all_log %}
+    <table class="table table-bordered" style=" margin-top: 10px; border: 1px" id="submit">
+        <tr>
+            <th>登录时间：</th>
+            <th>登出时间：</th>
+            <th>登录IP：</th>
+            <th>登录时长:</th>
+        </tr>
+        {% for log in logs %}
+            <tr id="domo">
+                {% if loop.first %}
+                    <td>{{ log.login_time }}</td>
+                    <td></td>
+                    <td>{{ log.ip }}</td>
+                    <td>当前在线</td>
+                    </tr>
+                {% else %}
+                    <tr id="domo">
+                        <td>{{ log.login_time }}</td>
+                        <td>{{ log.logout_time }}</td>
+                        <td>{{ log.ip }}</td>
+                        <td>{{ log.logout_time - log.login_time }}</td>
+                    </tr>
+                {% endif %}
+        {% endfor %}
+        <tbody class="center">
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        function timeStamp2String(time1) {
+            var datetime = new Date();
+            var time = time1-8*60*60*1000;
+            datetime.setTime(time);
+            var year = datetime.getFullYear();
+            var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+            var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+            var hour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
+            var minute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+            var second = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+            return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+        }
+
+        function upperCase(x) {
+            var y = document.getElementById(x).value;
+            document.getElementById(x).value = y.toUpperCase();
+            zlajax.post({
+                'url': '/eog/my_log/',
+                'data': {
+                    "date": y
+                },
+                'success': function (data) {
+                    if (data['code'] == 200) {
+                        var logList = data['data'];
+                        console.log(data['data']);
+                        $("tr#domo").hide();
+                        var html = "";
+                        for (var i = 0; i < logList.length; i++) {
+                            html += "<tr>";
+                            html += "<td>" + timeStamp2String(logList[i]['login_time']['$date']) + "</td>";
+                            html += "<td>" + timeStamp2String(logList[i]['logout_time']['$date']) + "</td>";
+                            html += "<td>" + logList[i]['ip'] + "</td>";
+                            html += "<td>" + parseInt((logList[i]['logout_time']['$date'] - logList[i]['login_time']['$date'])/60000) +'分钟'+ "</td>";
+                            html += "</tr>";
+                        }
+                        $(".center").html(html);
+                        setTimeout(function () {
+                            zlalert.alertSuccessToast('加载成功！');
+                        }, 100);
+
+                    }else{
+                        zlalert.alertInfo(data['message']);
+                    }
+                },
+                'fail': function (error) {
+                    zlalert.alertNetworkError();
+                }
+            });
+
+        }
+    </script>
+
+    <h4 style="margin-top: 20px">账号信息</h4>
+    <h6 style="margin-bottom: 5px">选择日期</h6>
+    <div>
+    <input type="date" id="date1" onchange="account(this.id)"><span>—→</span><input type="date" id="date2" onchange="account(this.id)">
+    <table class="table table-bordered" style=" margin-top: 10px" id="submit1">
+        <tr>
+            <th>操作时间：</th>
+            <th>操作IP：</th>
+            <th>具体操作：</th>
+            <th>是否本人操作：</th>
+        </tr>
+    </table>
+
+    </div>
+    <script>
+       function account(x) {
+           var y = document.getElementById(x).value;
+           console.log(y);
+           zlajax.post({
+               'url': '/eog/account/',
+               'data':{
+                   'tag_id': x,
+                   'date': y,
+               },
+               'success':function (data) {
+                   if(data['code']==200){
+                       var dateList = data['data']
+                   }
+               }
+           })
+       }
+    </script>
+{% endblock %}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>规则库</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+{% for message in get_flashed_messages() %}
+    <h4
+            style="color: #cc0000" align="center"> {{ message }}
+    </h4>
+{% endfor %}
+
+
+<div class="col-sm-10" style="margin-left: 10%">
+<button class="btn btn-warning"><a href="{{ url_for('e') }}">专家值守平台</a></button>
+    <form class="form-horizontal" method="POST">
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-1 control-label">正则规则</label>
+            <div class="col-sm-10">
+                 <textarea class="form-control" name="rule" clos="50" rows="3" placeholder="规则"
+                           warp="virtual" required></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-1 control-label">类型</label>
+            <div class="col-sm-10">
+                <select name="type" id="" class="form-control">
+                    <option value="暗链">暗链</option>
+                    <option value="网站劫持">网站劫持</option>
+                    <option value="黑页">黑页</option>
+                    <option value="挖矿">挖矿</option>
+                    <option value="反共">反共</option>
+                </select>
+                {#            <input type="text" class="form-control" name="type" placeholder="类型">#}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-1 control-label">等级</label>
+            <div class="col-sm-10">
+                <select name="leave" id="" class="form-control">
+                    <option value="紧急">紧急</option>
+                    <option value="高危">高危</option>
+                    <option value="中危">中危</option>
+                    <option value="低危">低危</option>
+                </select>
+                {#            <input type="text" class="form-control" name="leave" placeholder="等级">#}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-1 control-label">规则描述</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="des" placeholder="规则描述">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-1 control-label">修复建议</label>
+            <div class="col-sm-10">
+                <textarea class="form-control"  name="suggestion" clos=",50" rows="3" placeholder="修复建议"
+                          class="col-sm-10" warp="virtual"></textarea>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-offset-10 col-sm-10">
+                <button type="submit" class="btn btn-success">插入数据</button>
+            </div>
+        </div>
+    </form>
+
+
+    <div>
+        <table class="table table-hover table-bordered table-condensed table-responsive">
+            <thead>
+            <tr>
+                <th>规则</th>
+                <th>类型</th>
+                <th>危险等级</th>
+                <th>创建时间</th>
+                <th>命中次数</th>
+                <th>描述</th>
+                <th>修复建议</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for rule in rules %}
+                {% if rule['leave']=='紧急' %}
+                    {% set class='danger' %}
+                {% elif rule['leave']=='高危' %}
+                    {% set class='warning' %}
+                {% elif rule['leave']=='中危' %}
+                    {% set class='success' %}
+                {% elif rule['leave']=='低危' %}
+                    {% set class='info' %}
+                {% endif %}
+                <tr class={{ class }}>
+                    <td> <textarea class="form-control" name="suggestion" clos=",50" rows="3" placeholder="修复建议"
+                                   class="col-sm-10" warp="virtual">{{ rule['rule'] }}</textarea></td>
+
+                    <td>{{ rule['type'] }}</td>
+                    <td>{{ rule['leave'] }}</td>
+                    <td>{{ rule['create_time'] }}</td>
+                    <td>{{ rule['hit_count'] }}</td>
+                    <td><textarea class="form-control" name="suggestion" clos=",50" rows="3"
+                                  placeholder="描述"
+                                  class="col-sm-10" warp="virtual">{{ rule['des'] }}</textarea>
+                    </td>
+
+                    <td><textarea class="form-control"  name="suggestion" clos=",50" rows="3"
+                                  placeholder="修复建议"
+                                  class="col-sm-10" warp="virtual">{{ rule['suggestion'] }}</textarea>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('delete') }}" method="post">
+                            <input type="hidden" name="delete" value="{{ rule['rule'] }}">
+                            <button type="submit">删除</button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>
