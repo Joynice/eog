@@ -7,5 +7,5 @@
 dist
 build
 __pycache__/
-
+*.idea
 # 这是一个忽略上传的文件
