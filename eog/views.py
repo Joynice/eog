@@ -288,11 +288,16 @@ class ResetEmailView(views.MethodView):
             email = form.email.data
             if User.objects(email=email).first():
                 return restful.params_error('该邮箱已经被注册，请选择未被使用的邮箱注册！')
+            last = g.eog_user.email
             g.eog_user.email = email
             g.eog_user.save()
             NowTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            change_email_signal.send(operate_time=NowTime, ip=request.remote_addr,
+            change_email_signal.send(operate_time=NowTime, ip=request.remote_addr, username=email,
                                      operate_detail='修改邮箱为:{}'.format(email))
+            accounts = Account.objects(operator=last).all()
+            for account in accounts:
+                account.operator = email
+                account.save()
             return restful.success()
         else:
             return restful.params_error(form.get_error())
@@ -391,6 +396,8 @@ def remove():
     tag = request.args.get('tag')
     if tag == '1':
         User.objects(email=g.eog_user.email).delete()
+        Log.objects(handler=g.eog_user.email).delete()
+        Account.objects(operator=g.eog_user.email).delete()
         del session[DevelopmentConfig.CMS_USER_ID]
         flash('账号删除成功！')
         return restful.success()

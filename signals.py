@@ -43,9 +43,11 @@ def change_username(sender, operate_time, ip, operate_detail='修改用户名'):
     account.save()
 
 
-def change_email(sender, operate_time, ip, operate_detail='修改邮箱'):
-    account = Account(operate_time=operate_time, operator=g.eog_user.email, ip=ip, operate_detail=operate_detail,
+def change_email(sender, operate_time, ip, username, operate_detail='修改邮箱'):
+    account = Account(operate_time=operate_time, operator=username, ip=ip, operate_detail=operate_detail,
                       today=datetime.datetime.today().date())
+    print(username)
+    print(g.eog_user.email)
     account.save()
 
 

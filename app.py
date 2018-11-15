@@ -7,6 +7,7 @@ from exts import db, mail
 from flask_wtf.csrf import CSRFProtect
 import datetime
 
+
 def create_app(config_env):
     app = Flask(__name__)
     app.config.from_object(config[config_env])
@@ -22,6 +23,7 @@ def create_app(config_env):
 
 
 app = create_app('default')
+
 
 
 if __name__ == '__main__':
