@@ -22,6 +22,10 @@ strTime = time.strftime("%Y_%m_%d_%H_%M_%S", timeStruct)
 ALLOWED_EXTENSIONS = ['pdf', 'png', 'jpg', 'jpeg', 'gif']
 
 
+def dateTOtimestamp(date):
+    return time.mktime(time.strptime(date, '%Y-%m-%d'))
+
+
 @bp.route('/')
 @login_required
 def index():
@@ -173,25 +177,113 @@ def rules():
         return render_template('eog/rules.html', **context)
 
 
-@bp.route('/log/')
-@login_required
-def log():
-    '''
-#TODO(李然):添加查询时间段的功能，在 #190`Operate_Log`分页的对象换成查询时间段后的对象
-    :return:
-    '''
-    log_count =Operate_Log.objects().count()
-    page = request.args.get(get_page_parameter(), type=int, default=1)
-    start = (page - 1) * Config.LOG_PER_PAGE
-    end = start + Config.LOG_PER_PAGE
-    pagination = Pagination(bs_version=3, page=page, total=log_count, per_page=Config.LOG_PER_PAGE)
-    logs = (Operate_Log.objects.order_by('-operate_time'))[start:end]
-    context={
-        "logs":logs,
-        "pagination": pagination,
-        "log_count": log_count
-    }
-    return render_template('eog/operate_log.html',**context)
+# @bp.route('/log/')
+# @login_required
+# def log():
+#     '''
+# #TODO(李然):添加查询时间段的功能，在 #190`Operate_Log`分页的对象换成查询时间段后的对象
+#     :return:
+#     '''
+#     log_count =Operate_Log.objects().count()
+#     page = request.args.get(get_page_parameter(), type=int, default=1)
+#     start = (page - 1) * Config.LOG_PER_PAGE
+#     end = start + Config.LOG_PER_PAGE
+#     pagination = Pagination(bs_version=3, page=page, total=log_count, per_page=Config.LOG_PER_PAGE)
+#     logs = (Operate_Log.objects.order_by('-operate_time'))[start:end]
+#     context={
+#         "logs":logs,
+#         "pagination": pagination,
+#         "log_count": log_count
+#     }
+#     return render_template('eog/operate_log.html',**context)
+
+
+class LogView(views.MethodView):
+    decorators = [login_required]
+    def get(self):
+        print(request)
+        log_count = Operate_Log.objects().count()
+        page = request.args.get(get_page_parameter(), type=int, default=1)
+        start = (page - 1) * Config.LOG_PER_PAGE
+        end = start + Config.LOG_PER_PAGE
+        pagination = Pagination(bs_version=3, page=page, total=log_count, per_page=Config.LOG_PER_PAGE)
+        logs = (Operate_Log.objects.order_by('-operate_time'))[start:end]
+        context = {
+            "logs": logs,
+            "pagination": pagination,
+            "log_count": log_count
+        }
+        return render_template('eog/operate_log.html', **context)
+
+    def post(self):
+        realname = request.form.get('realname')
+        date1 = request.form.get('date1')
+        date2 = request.form.get('date2')
+        print(realname, date1, date2)
+        if realname == '' and date1 == '' and date2:
+            print(222)
+            return restful.params_error(message='输入的时间格式不合法！')
+        if realname:
+            if date1:
+                if date2:
+                    if dateTOtimestamp(date1) > dateTOtimestamp(date2):
+                        return restful.params_error(message='输入的时间不合法！')
+                    log = Operate_Log.objects(realname=realname, today__gte=date1, today__lte=date2).order_by(
+                        '-operate_time').all()
+                    print(log)
+                    if not log:
+                        return restful.params_error(message='没有找到信息！')
+                    count = log.count()
+                    data = {
+                        "logs": log,
+                        "count": count
+                    }
+                    return restful.success(message='查询到{}条记录'.format(count), data=data)
+                else:
+                    log = Operate_Log.objects(realname=realname, today=date1).order_by('-operate_time').all()
+                    if not log:
+                        return restful.params_error(message='没有找到信息！')
+                    count = log.count()
+                    data = {
+                        "logs": log,
+                        "count": count
+                    }
+                    return restful.success(message='查询到{}条记录'.format(count), data=data)
+            else:
+                log = Operate_Log.objects(realname=realname).order_by('-operate_time').all()
+                if not log:
+                    return restful.params_error(message='没有找到信息！')
+                count = log.count()
+                data = {
+                    "logs": log,
+                    "count": count
+                }
+                return restful.success(message='查询到{}条记录'.format(count), data=data)
+        else:
+            if date1:
+                if date2:
+                    if dateTOtimestamp(date1) > dateTOtimestamp(date2):
+                        return restful.params_error(message='输入的时间不合法！')
+                    log = Operate_Log.objects(today__gte=date1, today__lte=date2).order_by('-operate_time').all()
+                    if not log:
+                        return restful.params_error(message='没有找到信息！')
+                    count = log.count()
+                    data = {
+                        "logs": log,
+                        "count": count
+                    }
+                    return restful.success(message='查询到{}条记录'.format(count), data=data)
+                else:
+                    log = Operate_Log.objects(today=date1).order_by(
+                        '-operate_time').all()
+                    if not log:
+                        return restful.params_error(message='没有找到信息！')
+                    count = log.count()
+                    data = {
+                        "logs": log,
+                        "count": count
+                    }
+                    return restful.success(message='查询到{}条记录'.format(count), data=data)
 
 
 @bp.route('/source/')
@@ -227,7 +319,7 @@ def logout():
     return redirect(url_for('front.login'))
 
 
-class LogView(views.MethodView):
+class MyLogView(views.MethodView):
     decorators = [login_required]
 
     def get(self):
@@ -351,10 +443,6 @@ class UploadavatarView(views.MethodView):
         return restful.success('修改头像成功！')
 
 
-def dateTOtimestamp(date):
-    return time.mktime(time.strptime(date, '%Y-%m-%d'))
-
-
 class AccountView(views.MethodView):
     decorators = [login_required]
 
@@ -382,7 +470,7 @@ class AccountView(views.MethodView):
                     else:
                         return restful.success(data=account)
             else:
-                account = Account.objects(operator=g.eog_user.email,today=date1).order_by('-operate_time').all()
+                account = Account.objects(operator=g.eog_user.email, today=date1).order_by('-operate_time').all()
                 print(account)
                 if not account:
                     return restful.params_error(message='没有找到{}的账号信息'.format(date1))
@@ -410,4 +498,5 @@ bp.add_url_rule('/resetpwd/', view_func=ResetPWView.as_view('resetpwd'))
 bp.add_url_rule('/resetmail/', view_func=ResetEmailView.as_view('resetmail'))
 bp.add_url_rule('/profile/', view_func=UploadavatarView.as_view('profile'))
 bp.add_url_rule('/resetusername/', view_func=ResetUsernameView.as_view('resetusername'))
-bp.add_url_rule('/my_log/', view_func=LogView.as_view('my_log'))
+bp.add_url_rule('/my_log/', view_func=MyLogView.as_view('my_log'))
+bp.add_url_rule('/log/', view_func=LogView.as_view('log'))

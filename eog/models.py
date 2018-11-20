@@ -93,3 +93,4 @@ class Operate_Log(db.Document):
     ip = db.StringField()
     path = db.StringField()
     operation = db.StringField()
+    today = db.DateTimeField(requried=False)

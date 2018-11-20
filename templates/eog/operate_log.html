@@ -4,16 +4,66 @@
     操作日志
 {% endblock %}
 {% block head %}
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="stylesheet" href="{{ static('eog/css/selectFilter.css') }}">
+    <script type="text/javascript" src="{{ static('eog/js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ static('eog/js/selectFilter.js') }}"></script>
+    <script type="text/javascript" src="{{ static('eog/js/log.js') }}"></script>
+    <script src="{{ static('eog/js/tableExport/libs/FileSaver/FileSaver.min.js') }}"></script>
+    <script src="{{ static('eog/js/tableExport/tableExport.min.js') }}"></script>
 
 {% endblock %}
 
 {% block main %}
     <h2>操作日志</h2>
-    <table class="table table-striped table-hover table-bordered table-condensed ">
+    {% set all_user = g.all_user %}
+    <form class="form-inline" style="margin-bottom: 10px">
+        <div class="form-group">
+            <span>操作人：</span>
+        </div>
+        <div class="form-group">
+            <div class="filter-box">
+                <div class="filter-text">
+                    <input class="filter-title form-control" type="text" id="realname" readonly placeholder="真实姓名"/>
+                    <i class="icon icon-filter-arrow"></i>
+                </div>
+                <select name="filter">
+                    {% for foo in all_user %}
+                        <option value="{{ foo.realname }}">{{ foo.realname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group" style="margin-left: 20px"><span>选择时间：</span></div>
+        <div class="form-group"><input type="date" class="form-control" id="date1"/></div>
+
+        <div class="form-group"><span>—→</span></div>
+        <div class="form-group"><input type="date" class="form-control" id="date2"/></div>
+        <div class="form-group">
+
+            <button class="btn btn-primary" type="submit" id="query"
+                    style="padding-top: 4px; padding-bottom: 4px; padding-right: 8px; padding-left: 8px; margin-left: 8px">
+                查询
+            </button>
+        </div>
+        <div class="form-group">
+            <!-- Single button -->
+            <button class="btn btn-primary" type="submit" id="export"
+                    style="padding-top: 4px; padding-bottom: 4px; padding-right: 8px; padding-left: 8px; margin-left: 8px">
+                导出
+            </button>
+            {##}
+        </div>
+
+    </form>
+
+
+
+    <table class="table table-striped table-hover table-bordered table-condensed " id="tables">
         <thead>
         <tr>
             <th><input type="checkbox"/></th>
-            <th>用户名</th>
+            <th>真实姓名</th>
             <th>角色</th>
             <th>时间</th>
             <th>ip</th>
@@ -23,8 +73,8 @@
         </thead>
         <tbody>
         {% for log in logs %}
-            <tr>
-                <td><input type="checkbox"></td>
+            <tr id="log">
+                <td><input type="checkbox"/></td>
                 <td>{{ log.realname }}</td>
                 <td>安全专家</td>
                 <td>{{ log.operate_time.strftime('%Y-%m-%d %H:%M:%S') }}</td>
@@ -34,10 +84,40 @@
             </tr>
         {% endfor %}
 
-
+        <tbody id="log1">
         </tbody>
     </table>
-        <div style="text-align: center">
-            {{ pagination.links }}
-        </div>
+    <div style="text-align: center" id="log2">{{ pagination.links }}</div>
+    <div style="text-align: center" id="log3"></div>
+    <script type="text/javascript">
+        $(function () {
+            $("#export").click(function (evnet) {
+                evnet.preventDefault();
+                var realname = $("#realname").val();
+                var date1 = $("#date1").val();
+                var date2 = $("#date2").val();
+                $("#tables").tableExport({
+                    type: "excel",
+                    fileName: "专家值守平台"+realname+date1+date2,
+                    exportDataType: 'selected',
+                    escape: 'false',
+                    ignoreColumn: '[0]',
+                    worksheetName: "专家值守平台",
+                    tableName: "专家值守平台"+realname+date1+date2,
+
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        //本小插件支持移动端哦
+
+        //这里是初始化
+        $('.filter-box').selectFilter({
+            callBack: function (val) {
+                //返回选择的值
+                console.log(val + '-是返回的值')
+            }
+        });
+    </script>
 {% endblock %}

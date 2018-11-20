@@ -5,7 +5,8 @@ class Config(object):
     LOG_PER_PAGE = 19
 
     # REDIS 数据库配置
-    REDIS_HOST = '10.63.3.62'
+    REDIS_HOST = '10.63.3.62'  # yuqing
+    # REDIS_HOST = '192.168.0.119'#drops
     REDIS_PORT = 6379
     REDIS_TASK_DB = 1
     REDIS_PASSWORD = ''
@@ -15,7 +16,9 @@ class Config(object):
 
 class DevelopmentConfig(Config):
     MONGODB_SETTINGS = {'DB': "myDev",
-                        "host": 'mongodb://10.63.3.62:27017/myDev'}
+                        "host": 'mongodb://10.63.3.62:27017/myDev'}  #yuqing
+    # MONGODB_SETTINGS = {'DB': "myDev",
+    #                     "host": 'mongodb://admin:admin@192.168.0.119:27017/myDev?authSource=admin&authMechanism=SCRAM-SHA-1'} #drops
     # 发送者邮箱的服务器地址
     MAIL_SERVER = "smtp.qq.com"
     MAIL_PORT = '587'
@@ -43,4 +46,3 @@ config = {
     'prodection': ProductionConfig,
     'default': DevelopmentConfig
 }
-
