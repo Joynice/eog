@@ -1,8 +1,5 @@
 # eog
 专家值守平台
-master 卜俊杰测试
-开始dev开发
-1
 
 ## 日志功能模块开发
 
@@ -45,6 +42,36 @@ class Operate_Log(db.Document):
 
 注意：用`mongoengine`的分页查询和按照时间的倒序查询时，当查询的数据比较多的时候，会产生数据库缓存不足的错误
 ```
+**登录**
+
+目的：实现专家登录功能，限制未登录用户访问后台路由。
+
+数据库字段
+
+```angular2html
+class User(db.Document):
+    '''
+    用户登录：用户名、密码、邮箱、真实姓名、加入时间、头像地址
+    '''
+    meta = {'collection': 'user'}
+    _id = db.StringField(default=shortuuid.uuid)
+    username = db.StringField(required=True, max_length=50)
+    password = db.StringField(required=True, max_length=200)
+    email = db.EmailField(required=True, max_length=100)
+    realname = db.StringField(required=True, max_length=10)
+    join_time = db.DateTimeField(required=False, default=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+    avatar_path = db.StringField(required=False)
+
+    def avatar(self):
+        print(sep + 'static' + sep + 'eog' + sep + 'img' + sep + 'default' + sep + random.choice(
+            os.listdir('./static/eog/img/default/')))
+        return sep + 'static' + sep + 'eog' + sep + 'img' + sep + 'default' + sep + random.choice(
+            os.listdir('./static/eog/img/default/'))
+```
+TODO:没有解决mongodb密码加密功能。
+
+****
+
 
 
 
