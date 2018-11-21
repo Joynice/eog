@@ -70,8 +70,37 @@ class User(db.Document):
 ```
 TODO:没有解决mongodb密码加密功能。
 
-****
+**注册**
 
+
+目的：实现用户根据自己的邮箱实现注册功能。
+
+数据库字段:同登录
+
+路由：
+```angular2html
+class SignupView(views.MethodView):
+    def get(self):
+        return render_template('front/signup.html')
+
+    def post(self):
+        form = SignupForm(request.form)
+        print(form)
+        print(form.email.data)
+        if form.validate():
+            email = form.email.data
+            username = form.username.data
+            password = form.password1.data
+            realname = form.realname.data
+            print(email)
+            user = User(email=email, username=username, password=password, realname=realname)
+            user.save()
+            return restful.success()
+        else:
+            # print(form.get_error())
+
+            return restful.server_error(message=form.get_error())
+```
 
 
 

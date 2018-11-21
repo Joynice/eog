@@ -1,12 +1,12 @@
 {% from "common/_macros.html" import static %}
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>
-    {% block title %}
-    {% endblock %}
+        {% block title %}
+        {% endblock %}
     </title>
     {% include "common/_heads.html" %}
     <link rel="stylesheet" href="{{ static("eog/css/dashboard.css") }}">
@@ -49,14 +49,14 @@
                            aria-expanded="false">
                             {% set user = g.eog_user %}
                             {% if not user %}
-                            {{ url_for('front.login') }}
+                                {{ url_for('front.login') }}
                             {% endif %}
                             {% if not user.avatar_path %}
                                 <img src="{{ g.eog_user.avatar() }}"
-                                 style="width:25px;height: 25px; margin-right: 10px; border-radius:3px">
+                                     style="width:25px;height: 25px; margin-right: 10px; border-radius:3px">
                             {% else %}
-                            <img src="{{ g.eog_user.avatar_path}}"
-                                 style="width:25px;height: 25px; margin-right: 10px; border-radius:3px">
+                                <img src="{{ g.eog_user.avatar_path }}"
+                                     style="width:25px;height: 25px; margin-right: 10px; border-radius:3px">
                             {% endif %}
                             {{ g.eog_user.username }}
                             <span class="caret"></span></a>
@@ -79,15 +79,19 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="today_event"><a href="{{ url_for('eog.index') }}">今日新增事件 <span class="badge ">4</span> <span class="label label-warning">New</span><span
+                <li class="today_event"><a href="{{ url_for('eog.index') }}">今日新增事件 <span class="badge ">4</span> <span
+                        class="label label-warning">New</span><span
                         class="sr-only">(current)</span></a></li>
-                <li class="events"><a href="{{ url_for('eog.events') }}">安全事件<span class="badge ">{{ g.event_count }}</span></a></li>
+                <li class="events"><a href="{{ url_for('eog.events') }}">安全事件<span
+                        class="badge ">{{ g.event_count }}</span></a></li>
                 <li class="review_event"><a href="{{ url_for('eog.review_event') }}">已审核</a></li>
-                <li class="danger_event"><a href="{{ url_for('eog.danger_event') }}">通报事件<span class="badge ">4</span></a></li>
+                <li class="danger_event"><a href="{{ url_for('eog.danger_event') }}">通报事件<span
+                        class="badge ">4</span></a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li class="source"><a href="{{ url_for('eog.source') }}">数据源 </a></li>
-                <li class="rules"><a href="{{ url_for('eog.rules') }}">规则库 <span class="badge ">{{ g.rules_count }}</span></a></li>
+                <li class="rules"><a href="{{ url_for('eog.rules') }}">规则库 <span
+                        class="badge ">{{ g.rules_count }}</span></a></li>
                 <li class="index1"><a href="{{ url_for('eog.index') }}">待定 </a></li>
                 <li class="index2"><a href="{{ url_for('eog.index') }}">待定</a></li>
             </ul>
@@ -101,12 +105,12 @@
 
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <div class="page-header">
+            <div class="page-header">
                 {% block page_header_h3 %}
 
                 {% endblock %}
             </div>
-                    <ol class="breadcrumb">
+            <ol class="breadcrumb">
                 {% block breadcrumb_li %}
                 {% endblock %}
                 {#  例子<li><a href="#">Home</a></li>#}
@@ -114,8 +118,6 @@
                 {#  <li class="active">Data</li>#}
             </ol>
             {% block main %}
-
-
 
             {% endblock %}
 

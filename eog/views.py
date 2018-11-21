@@ -15,6 +15,7 @@ from signals import logout_signal, change_email_signal, change_password_signal, 
     change_lcon_signal
 from datetime import datetime
 
+
 bp = Blueprint('eog', __name__, url_prefix='/eog')
 secE_db = SecEvent()
 timeStruct = time.localtime(time.time())
@@ -491,7 +492,6 @@ def remove():
         return restful.success()
     else:
         return restful.params_error('传参错误！')
-
 
 bp.add_url_rule('/account/', view_func=AccountView.as_view('account'))
 bp.add_url_rule('/resetpwd/', view_func=ResetPWView.as_view('resetpwd'))

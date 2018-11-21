@@ -9,6 +9,7 @@ class Config(object):
     # REDIS_HOST = '192.168.0.119'#drops
     REDIS_PORT = 6379
     REDIS_TASK_DB = 1
+    REDIS_SOCKET_DB = 15
     REDIS_PASSWORD = ''
     REDIS_DECODE_RESPONSES = True
     REDIS_ENCODING = 'utf-8'
