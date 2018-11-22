@@ -8,14 +8,17 @@ from flask_paginate import Pagination, get_page_args, get_page_parameter
 from .models import Event_Search_Engine, Rule, Operate_Log
 from .decorators import login_required
 from .forms import ResetEmailForm, ResetpwdForm, ResetUsernameForm, AddSuggesionEvent
-from utils import restful
+from utils import restful, zlcache
 from front.models import User, Log, Account
 import os
 from signals import logout_signal, change_email_signal, change_password_signal, change_username_signal, \
     change_lcon_signal
 from datetime import datetime
-
-
+from threading import Lock
+from exts import socketio
+thread = None
+async_mode = None
+thread_lock = Lock()
 bp = Blueprint('eog', __name__, url_prefix='/eog')
 secE_db = SecEvent()
 timeStruct = time.localtime(time.time())
@@ -492,6 +495,31 @@ def remove():
         return restful.success()
     else:
         return restful.params_error('传参错误！')
+
+
+@bp.route('/monitor/<id>/')
+@login_required
+def monitor(id):
+    zlcache.socket_set(key='key', value=id)
+    return render_template('eog/chart.html', async_mode=socketio.async_mode)
+
+
+def get_date():
+    while True:
+        socketio.sleep(5)
+        id = int(zlcache.socket_get(key='key'))
+        date = zlcache.socket_get(id)
+        date_list = eval(date)
+        socketio.emit('server_response', {'data': date_list}, namespace='/test')
+
+
+@socketio.on('connect', namespace='/test')
+def test_connect():
+    global thread
+    with thread_lock:
+        if thread is None:
+            thread = socketio.start_background_task(target=get_date)
+
 
 bp.add_url_rule('/account/', view_func=AccountView.as_view('account'))
 bp.add_url_rule('/resetpwd/', view_func=ResetPWView.as_view('resetpwd'))
