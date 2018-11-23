@@ -35,7 +35,6 @@ def before_request():
             g.all_user = all_user
 
 
-
 @bp.after_request
 def after_request(respones):
     '''
@@ -46,11 +45,12 @@ def after_request(respones):
     :return:
     '''
     path = request.path
+    print(path)
     ip = request.remote_addr
     ignore_path = ['/eog/events/', '/eog/rules/', '/eog/log/', '/eog/resetpwd/', '/eog/profile/', '/eog/my_log/',
                    '/eog/', '/eog/danger_event/', '/eog/review_event/',
                    '/eog/my_score/', '/eog/my_review/', '/eog/logout/', '/eog/account/', '/eog/resetmail/',
-                   '/eog/resetusername/','/eog/source/']  # 不想被写进日志忽略的路由
+                   '/eog/resetusername/', '/eog/source/', '/eog/monitor/']  # 不想被写进日志忽略的路由
     path_and_operation_detail = {'/eog/event_detail/': '查看安全事件{}详情'.format(request.form.get('event_id')),
                                  '/eog/event_suggestion/': '审核{id}事件为{status}'.format(id=request.form.get('id'),
                                                                                       status=request.form.get('status'))

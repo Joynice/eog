@@ -18,7 +18,7 @@ forget_password_signal = namespace.signal('forget_password')
 
 def login_log(sender, handler, ip, login_time):
     log = Log(handler=handler, login_time=login_time, ip=ip,
-              logout_time=(datetime.datetime.now() + datetime.timedelta(hours=3)).strftime("%Y-%m-%d %H:%M:%S"),
+              logout_time=(datetime.datetime.now() + datetime.timedelta(hours=6)).strftime("%Y-%m-%d %H:%M:%S"),
               today=datetime.datetime.now().strftime('%Y-%m-%d'))
     log.save()
 
@@ -46,8 +46,6 @@ def change_username(sender, operate_time, ip, operate_detail='修改用户名'):
 def change_email(sender, operate_time, ip, username, operate_detail='修改邮箱'):
     account = Account(operate_time=operate_time, operator=username, ip=ip, operate_detail=operate_detail,
                       today=datetime.datetime.today().date())
-    print(username)
-    print(g.eog_user.email)
     account.save()
 
 

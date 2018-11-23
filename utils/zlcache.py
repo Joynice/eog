@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 __author__ = 'Joynice'
-from redis import Redis
+from redis import Redis, StrictRedis
 import config
 
 cache = Redis(host=config.Config.REDIS_HOST, port=config.Config.REDIS_PORT,
@@ -34,3 +34,9 @@ def socket_get(key):
 
 def socket_get_key():
     return socket_cache.keys()
+
+
+def socket_get_keys():
+    return socket_cache.keys()
+
+

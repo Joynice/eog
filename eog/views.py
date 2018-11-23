@@ -204,6 +204,7 @@ def rules():
 
 class LogView(views.MethodView):
     decorators = [login_required]
+
     def get(self):
         print(request)
         log_count = Operate_Log.objects().count()
@@ -403,7 +404,7 @@ class ResetUsernameView(views.MethodView):
     decorators = [login_required]
 
     def get(self):
-        return render_template('eog/profile.html')
+        return render_template('eog/my_setting.html')
 
     def post(self):
         form = ResetUsernameForm(request.form)
@@ -497,20 +498,21 @@ def remove():
         return restful.params_error('传参错误！')
 
 
-@bp.route('/monitor/<id>/')
+@bp.route('/monitor/')
 @login_required
-def monitor(id):
-    zlcache.socket_set(key='key', value=id)
+def monitor():
+    id = request.args.get('id')
+    print(id)
     return render_template('eog/chart.html', async_mode=socketio.async_mode)
 
 
+#如何获取monitor传入id?
 def get_date():
-    while True:
-        socketio.sleep(5)
-        id = int(zlcache.socket_get(key='key'))
-        date = zlcache.socket_get(id)
+    while 1:
+        date = zlcache.socket_get(63)
         date_list = eval(date)
         socketio.emit('server_response', {'data': date_list}, namespace='/test')
+        socketio.sleep(5)
 
 
 @socketio.on('connect', namespace='/test')
