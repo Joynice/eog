@@ -46,6 +46,28 @@ class Operate_Log(db.Document):
 
 目的：实现专家登录功能，限制未登录用户访问后台路由。
 
+
+实现方法：获得表单的数据、通过Post方式提交到后端，进行后端进行表单验证，如果同user库邮箱、密码相匹配则重定向到后台首页，反之提示用户账号或者密码错误。详细实现过程可以看下源码，如有疑问，不吝赐教。
+
+
+表单验证字段
+
+````angular2html
+class LoginForm(BaseForm):
+    email = StringField(validators=[Email(message='请输入正确的邮箱格式'), InputRequired(message='请输入邮箱')])
+    password = StringField(validators=[Length(6, 20, message='请输入正确格式的密码')])
+    remember = IntegerField()
+````
+
+TODO:没有解决mongodb密码加密功能。
+
+**注册**
+
+
+目的：实现用户根据自己的邮箱实现注册功能。
+
+实现方法：前端通过Js获得用户填写的表单数据，前端进行些简单的验证如：邮箱格式、两次输入密码是否相同、以及在60s内无法再次点击发送邮件的限制，可以减轻服务器压力，防止恶作剧。将获得的表单数据通过Ajax Post方法发送给后端，后端进行表单验证，如果表单验证通过，就参入user库，否则给前端返回相应错误。
+
 数据库字段
 
 ```angular2html
@@ -68,39 +90,45 @@ class User(db.Document):
         return sep + 'static' + sep + 'eog' + sep + 'img' + sep + 'default' + sep + random.choice(
             os.listdir('./static/eog/img/default/'))
 ```
-TODO:没有解决mongodb密码加密功能。
 
-**注册**
+表单验证字段
+````angular2html
+class SignupForm(BaseForm):
+    email = StringField(validators=[Email(message='请输入正确格式的邮箱地址！'),InputRequired(message='请输入邮箱地址')])
+    email_captcha = StringField(validators=[Regexp(r'\w{4}', message='请输入正确格式的邮箱验证码！'), InputRequired(message='请输入邮箱验证码')])
+    username = StringField(validators=[Length(2, 20, message='请输入正确格式的用户名'), InputRequired(message='请输入用户名')])
+    password1 = StringField(validators=[Regexp(r'[0-9a-zA-Z_\./]{6,20}', message='请输入正确格式的密码'), InputRequired(message='请输入密码')])
+    password2 = StringField(validators=[Regexp(r'[0-9a-zA-Z_\./]{6,20}', message='请输入正确格式的密码'), InputRequired(message='请再次输入密码')])
+    graph_captcha = StringField(validators=[Regexp(r'\w{4}', message='请输入正确格式的图形验证码！'), InputRequired(message='请输入图形验证码')])
+    realname = StringField(validators=[InputRequired(message='请输入真实姓名'), InputRequired(message='请输入真实姓名')])
+
+    def validate_email_captcha(self, field):
+        captcha = field.data
+        email = self.email.data
+        try:
+            captcha_cache = zlcache.get(email)
+        except:
+            raise ValidationError(message='邮箱验证码不存在！')
+        if not captcha_cache or captcha.lower() != captcha_cache.lower():
+            raise ValidationError(message='邮箱验证码错误！')
+
+    def validate_graph_captcha(self, field):
+        graph_captcha = field.data
+        try:
+            graph_captcha_mem = zlcache.get(graph_captcha.lower())
+        except:
+            raise ValidationError(message='图形验证码不存在！')
+        print(graph_captcha_mem, graph_captcha)
+        if not graph_captcha_mem:
+            raise ValidationError(message='图形验证码错误！')
+````
 
 
-目的：实现用户根据自己的邮箱实现注册功能。
+**重置密码**
 
-数据库字段:同登录
+目的：让忘记密码的用户重置密码。
 
-路由：
-```angular2html
-class SignupView(views.MethodView):
-    def get(self):
-        return render_template('front/signup.html')
-
-    def post(self):
-        form = SignupForm(request.form)
-        print(form)
-        print(form.email.data)
-        if form.validate():
-            email = form.email.data
-            username = form.username.data
-            password = form.password1.data
-            realname = form.realname.data
-            print(email)
-            user = User(email=email, username=username, password=password, realname=realname)
-            user.save()
-            return restful.success()
-        else:
-            # print(form.get_error())
-
-            return restful.server_error(message=form.get_error())
-```
+实现方法：用户输入需要重置密码邮箱、通过发送邮箱验证码来进行
 
 
 

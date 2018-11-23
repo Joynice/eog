@@ -89,6 +89,8 @@ def email_captcha():
         return restful.params_error('邮箱已经被注册，请更换邮箱!')
     elif User.objects(email=email).first() and (params == 'resetpwd' or params == 'resetmail'):
         return restful.params_error('该邮箱已经被注册，请更换邮箱！')
+    elif not User.objects(email=email).first() and params == 'forgetpwd':
+        return restful.params_error('该邮箱没有被注册过，请先注册！')
     else:
         source = list(string.ascii_letters)
         source.extend(map(lambda x: str(x), range(0, 10)))

@@ -1,6 +1,7 @@
 $(function () {
-    $("#captcha-btn").click(function (event) {
+    $("#email-captcha-btn").click(function (event) {
         event.preventDefault();
+        var self = $(this);
         var email = $("input[name='email']").val();
         if (!email) {
             zlalert.alertInfoToast('请输入邮箱');
@@ -14,6 +15,17 @@ $(function () {
             'success': function (data) {
                 if (data['code'] == 200) {
                     zlalert.alertSuccessToast('邮件已发送，请注意查收！');
+                    self.attr("disabled",'disabled');
+                    var timeCount = 60;
+                    var timer = setTimeout(function () {
+                        timeCount--;
+                        self.text(timeCount);
+                        if(timeCount<=0){
+                            self.removeAttr('disabled');
+                            clearInterval(timer);
+                            self.text('发送验证码');
+                        }
+                    },1000);
                 } else {
                     zlalert.alertInfo(data['message']);
                 }

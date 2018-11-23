@@ -77,6 +77,7 @@ $(function () {
         var graph_captcha = graph_captcha_input.val();
         if (password1 != password2) {
             zlalert.alertErrorToast('两次输入的密码不同，请重新输入！');
+            return;
         }
         else {
             zlajax.post({
