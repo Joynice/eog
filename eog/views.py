@@ -16,6 +16,7 @@ from signals import logout_signal, change_email_signal, change_password_signal, 
 from datetime import datetime
 from threading import Lock
 from exts import socketio
+
 thread = None
 async_mode = None
 thread_lock = Lock()
@@ -203,6 +204,7 @@ def rules():
 
 
 class LogView(views.MethodView):
+
     decorators = [login_required]
 
     def get(self):
@@ -226,7 +228,6 @@ class LogView(views.MethodView):
         date2 = request.form.get('date2')
         print(realname, date1, date2)
         if realname == '' and date1 == '' and date2:
-            print(222)
             return restful.params_error(message='输入的时间格式不合法！')
         if realname:
             if date1:
@@ -360,7 +361,7 @@ class ResetPWView(views.MethodView):
             oldpwd = form.oldpwd.data
             newpwd = form.newpwd.data
             user = g.eog_user
-            if user.password == oldpwd:
+            if user.check_password(oldpwd):
                 user.password = newpwd
                 user.save()
                 NowTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -420,6 +421,7 @@ class ResetUsernameView(views.MethodView):
             return restful.params_error(form.get_error())
 
 
+# 允许上传文件类型
 def allowd_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
@@ -503,10 +505,15 @@ def remove():
 def monitor():
     id = request.args.get('id')
     print(id)
+    print(111)
     return render_template('eog/chart.html', async_mode=socketio.async_mode)
 
 
-#如何获取monitor传入id?
+def get_id(id):
+    pass
+
+
+# 如何获取monitor传入id?
 def get_date():
     while 1:
         date = zlcache.socket_get(63)

@@ -1,7 +1,6 @@
 from datetime import datetime
 from exts import db
-import shortuuid
-from werkzeug.security import generate_password_hash,check_password_hash
+
 
 class Event_Auto_Id(db.Document):
     '''
@@ -10,7 +9,6 @@ class Event_Auto_Id(db.Document):
     meta = {'collection': 'event_id'}
     _id = db.StringField(required=False, primary_key=True, default='auto_id')
     sequence_value = db.IntField(default=0)
-
 
 
 class Rule(db.Document):
@@ -78,8 +76,8 @@ class All_Result(db.Document):
     code = db.IntField()
     domain = db.StringField()
     jobid = db.StringField()
-    keyword_data =db.ListField()
-    jump_url =db.ListField()
+    keyword_data = db.ListField()
+    jump_url = db.ListField()
     events_list = db.ListField()
     websousec = db.StringField()
     img = db.StringField()
@@ -89,7 +87,7 @@ class All_Result(db.Document):
 class Operate_Log(db.Document):
     meta = {'collection': 'operate_log'}
     realname = db.StringField()
-    operate_time =db.DateTimeField(default=datetime.now)
+    operate_time = db.DateTimeField(default=datetime.now)
     ip = db.StringField()
     path = db.StringField()
     operation = db.StringField()

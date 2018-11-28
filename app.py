@@ -7,11 +7,6 @@ from exts import db, mail, socketio
 from flask_wtf.csrf import CSRFProtect
 import datetime
 
-from threading import Lock
-thread = None
-async_mode = None
-thread_lock = Lock()
-
 
 def create_app(config_env):
     app = Flask(__name__)
@@ -30,6 +25,6 @@ def create_app(config_env):
 
 app = create_app('default')
 
-
+# 利用socketio启动App
 if __name__ == '__main__':
     socketio.run(app, debug=True, host='0.0.0.0', port=5001)

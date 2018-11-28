@@ -21,7 +21,7 @@ class SignupForm(BaseForm):
     email_captcha = StringField(validators=[Regexp(r'\w{4}', message='请输入正确格式的邮箱验证码！'), InputRequired(message='请输入邮箱验证码')])
     username = StringField(validators=[Length(2, 20, message='请输入正确格式的用户名'), InputRequired(message='请输入用户名')])
     password1 = StringField(validators=[Regexp(r'[0-9a-zA-Z_\./]{6,20}', message='请输入正确格式的密码'), InputRequired(message='请输入密码')])
-    password2 = StringField(validators=[Regexp(r'[0-9a-zA-Z_\./]{6,20}', message='请输入正确格式的密码'), InputRequired(message='请再次输入密码')])
+    password2 = StringField(validators=[EqualTo("password1", message='两次密码输入不同！'), InputRequired(message='请再次输入密码')])
     graph_captcha = StringField(validators=[Regexp(r'\w{4}', message='请输入正确格式的图形验证码！'), InputRequired(message='请输入图形验证码')])
     realname = StringField(validators=[InputRequired(message='请输入真实姓名'), InputRequired(message='请输入真实姓名')])
 

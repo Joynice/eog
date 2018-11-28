@@ -11,7 +11,6 @@ socket_cache = Redis(host=config.Config.REDIS_HOST, port=config.Config.REDIS_POR
                      decode_responses=config.Config.REDIS_DECODE_RESPONSES,
                      db=config.Config.REDIS_SOCKET_DB)
 
-
 def set(key, value, timeout=120):
     return cache.set(key, value, timeout)
 

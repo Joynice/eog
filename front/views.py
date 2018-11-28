@@ -36,7 +36,8 @@ class SignupView(views.MethodView):
             password = form.password1.data
             realname = form.realname.data
             print(email)
-            user = User(email=email, username=username, password=password, realname=realname)
+            user = User(email=email, username=username, realname=realname)
+            user.password = password
             user.save()
             return restful.success()
         else:
@@ -56,7 +57,7 @@ class LoginView(views.MethodView):
             password = form.password.data
             remember = form.remember.data
             user = User.objects(email=email).first()
-            if user and password == user.password:
+            if user and user.check_password(password):
                 session[config.DevelopmentConfig.CMS_USER_ID] = user._id  # 保存用户登录信息
                 ip = request.remote_addr
                 NowTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')

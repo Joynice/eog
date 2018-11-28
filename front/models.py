@@ -11,39 +11,42 @@ sep = os.sep
 
 
 class User(db.Document):
-    '''
+    """
     用户登录：用户名、密码、邮箱、真实姓名、加入时间、头像地址
-    '''
+    """
     meta = {'collection': 'user'}
     _id = db.StringField(default=shortuuid.uuid)
     username = db.StringField(required=True, max_length=50)
-    password = db.StringField(required=True, max_length=200)
+    password_hash = db.StringField(required=True)
     email = db.EmailField(required=True, max_length=100)
     realname = db.StringField(required=True, max_length=10)
     join_time = db.DateTimeField(required=False, default=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
     avatar_path = db.StringField(required=False)
+
+    # def __init__(self, *args, **kwargs):
+    #     if 'password' in kwargs:
+    #         print(111)
+    #         self.password = kwargs.get('password')
+    #         print(self.password)
+    #         kwargs.pop('password')
+    #     super(User, self).__init__(*args, **kwargs)
+    #
+    @property
+    def password(self):
+        raise AttributeError('password is not a readle attribute')
+
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
     def avatar(self):
         print(sep + 'static' + sep + 'eog' + sep + 'img' + sep + 'default' + sep + random.choice(
             os.listdir('./static/eog/img/default/')))
         return sep + 'static' + sep + 'eog' + sep + 'img' + sep + 'default' + sep + random.choice(
             os.listdir('./static/eog/img/default/'))
-    # def __init__(self, *args, **kwargs):
-    #     if 'password' in kwargs:
-    #         self.password = kwargs.get('password')
-    #         kwargs.pop('password')
-    #     super(User, self).__init__(*args, **kwargs)
-    #
-    # @property
-    # def password(self):
-    #     return self.password1
-    #
-    # @password.setter
-    # def password(self, newpwd):
-    #     self.password1 = generate_password_hash(newpwd)
-    #
-    # def check_password(self, rawpwd):
-    #     return check_password_hash(self.password1, rawpwd)
 
 
 class Log(db.Document):
