@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask
 from front import bp as front_bp
 from common import bp as common_bp
 from eog import bp as eog_bp

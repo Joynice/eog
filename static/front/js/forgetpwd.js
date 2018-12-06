@@ -8,7 +8,7 @@ $(function () {
             return;
         }
         zlajax.get({
-            'url': '/front/email_captcha/',
+            'url': '/c/email_captcha/',
             'data': {
                 'email': email
             },

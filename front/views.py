@@ -4,14 +4,8 @@ from flask import Blueprint, views, render_template, request, url_for, redirect,
 from .forms import SignupForm, LoginForm, ForgetpwdForm
 from .models import User
 from signals import login_signal, forget_password_signal
-from utils import restful
-import string
-import random
-from exts import mail
-from flask_mail import Message
-from utils import zlcache
+from utils import restful, safeutils
 import config
-import re
 from datetime import datetime
 
 bp = Blueprint("front", __name__, url_prefix='/front')
@@ -24,7 +18,11 @@ def index():
 
 class SignupView(views.MethodView):
     def get(self):
-        return render_template('front/signup.html')
+        return_to = request.referrer
+        if return_to and return_to != request.url and safeutils.is_safe_url(return_to):
+            return render_template('front/signup.html', return_to=return_to)
+        else:
+            return render_template('front/signup.html')
 
     def post(self):
         form = SignupForm(request.form)
@@ -48,7 +46,12 @@ class SignupView(views.MethodView):
 
 class LoginView(views.MethodView):
     def get(self, message=None):
-        return render_template('front/login.html', message=message)
+        return_to = request.referrer
+        if return_to and return_to != request.url and return_to != url_for('front.signup') and \
+                safeutils.is_safe_url(return_to):
+            return render_template('front/login.html', return_to=return_to, message=message)
+        else:
+            return render_template('front/login.html', message=message)
 
     def post(self):
         form = LoginForm(request.form)
@@ -75,36 +78,36 @@ class LoginView(views.MethodView):
             return self.get(message=message)
 
 
-@bp.route('/email_captcha/')
-def email_captcha():
-    email = request.args.get('email')
-    params = request.referrer.split('/')[-2]
-    print(email)
-    print(params)
-    regex = '^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$'
-    if not re.match(regex, email):
-        return restful.params_error('请输入正确格式的邮箱！')
-    if not email:
-        return restful.params_error('请传递邮箱参数！')
-    elif params == 'signup' and User.objects(email=email).first():
-        return restful.params_error('邮箱已经被注册，请更换邮箱!')
-    elif User.objects(email=email).first() and (params == 'resetpwd' or params == 'resetmail'):
-        return restful.params_error('该邮箱已经被注册，请更换邮箱！')
-    elif not User.objects(email=email).first() and params == 'forgetpwd':
-        return restful.params_error('该邮箱没有被注册过，请先注册！')
-    else:
-        source = list(string.ascii_letters)
-        source.extend(map(lambda x: str(x), range(0, 10)))
-        captcha = "".join(random.sample(source, 6))
-        print(captcha)
-        message = Message('专家值守平台邮箱验证码', recipients=[email], body='您的验证码是：{}'.format(captcha))
-        print(message)
-    try:
-        mail.send(message)
-    except Exception as e:
-        return restful.server_error(message='可能邮箱不存在！请检查后再试')
-    zlcache.set(email, captcha)
-    return restful.success()
+# @bp.route('/email_captcha/')
+# def email_captcha():
+#     email = request.args.get('email')
+#     params = request.referrer.split('/')[-2]
+#     print(email)
+#     print(params)
+#     regex = '^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$'
+#     if not re.match(regex, email):
+#         return restful.params_error('请输入正确格式的邮箱！')
+#     if not email:
+#         return restful.params_error('请传递邮箱参数！')
+#     elif params == 'signup' and User.objects(email=email).first():
+#         return restful.params_error('邮箱已经被注册，请更换邮箱!')
+#     elif User.objects(email=email).first() and (params == 'resetpwd' or params == 'resetmail'):
+#         return restful.params_error('该邮箱已经被注册，请更换邮箱！')
+#     elif not User.objects(email=email).first() and params == 'forgetpwd':
+#         return restful.params_error('该邮箱没有被注册过，请先注册！')
+#     else:
+#         source = list(string.ascii_letters)
+#         source.extend(map(lambda x: str(x), range(0, 10)))
+#         captcha = "".join(random.sample(source, 6))
+#         print(captcha)
+#         message = Message('专家值守平台邮箱验证码', recipients=[email], body='您的验证码是：{}'.format(captcha))
+#         print(message)
+#     try:
+#         mail.send(message)
+#     except Exception as e:
+#         return restful.server_error(message='可能邮箱不存在！请检查后再试')
+#     zlcache.set(email, captcha)
+#     return restful.success()
 
 
 class Forgetpwd(views.MethodView):

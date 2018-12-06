@@ -51,7 +51,7 @@ class Event_Search_Engine(db.Document):
     搜索引擎事件数据库：自增长ID、自定义ID、域名、任务ID、命中的规则、来源、首次发现时间、最新发现事件、
                         审核详情、审核状态、快照
     '''
-    meta = {'collection': 'sec_event_test'}
+    meta = {'collection': 'sec_event'}
     _id = db.IntField(required=False, default='num')
     id = db.StringField(required=False)
     domain = db.StringField(required=False)

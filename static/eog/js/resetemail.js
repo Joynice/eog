@@ -8,7 +8,7 @@ $(function () {
             return;
         }
         zlajax.get({
-            'url': '/front/email_captcha',
+            'url': '/c/email_captcha',
             'data': {
                 'email': email
             },
@@ -42,7 +42,7 @@ $(function () {
 
 $(function () {
     $("#submit").click(function (event) {
-        event.preventDefault()
+        event.preventDefault();
         var emailE = $("input[name='email']");
         var captchaE = $("input[name='captcha']");
         var email = emailE.val();
@@ -59,6 +59,9 @@ $(function () {
                     zlalert.alertSuccessToast('修改邮箱成功！');
                     emailE.val("");
                     captchaE.val("");
+                    setTimeout(function () {
+                        window.location.reload();
+                    },1000)
                 } else {
 
                     zlalert.alertInfo(data['message']);

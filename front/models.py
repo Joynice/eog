@@ -23,14 +23,6 @@ class User(db.Document):
     join_time = db.DateTimeField(required=False, default=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
     avatar_path = db.StringField(required=False)
 
-    # def __init__(self, *args, **kwargs):
-    #     if 'password' in kwargs:
-    #         print(111)
-    #         self.password = kwargs.get('password')
-    #         print(self.password)
-    #         kwargs.pop('password')
-    #     super(User, self).__init__(*args, **kwargs)
-    #
     @property
     def password(self):
         raise AttributeError('password is not a readle attribute')

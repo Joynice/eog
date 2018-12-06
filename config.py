@@ -34,6 +34,10 @@ class DevelopmentConfig(Config):
     CMS_USER_ID = 'DSADSAD1551512'
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 
+    # celery相关的配置
+    CELERY_RESULT_BACKEND = 'redis://192.168.0.119:6379/13'
+    CELERY_BROKER_URL = 'redis://192.168.0.119:6379/13'
+
 
 class TestingConfig(Config):
     pass

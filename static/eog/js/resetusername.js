@@ -12,6 +12,9 @@ $(function () {
            'success': function (data) {
                if(data['code']==200){
                    zlalert.alertSuccessToast();
+                   setTimeout(function () {
+                       window.location.reload();
+                   },1000)
                }else {
                    zlalert.alertInfo(data['message']);
                }
