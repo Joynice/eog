@@ -3,7 +3,7 @@ from front import bp as front_bp
 from common import bp as common_bp
 from eog import bp as eog_bp
 from config import config
-from exts import db, mail, socketio
+from exts import db, mail, socketio, principal
 from flask_wtf.csrf import CSRFProtect
 import datetime
 
@@ -20,6 +20,7 @@ def create_app(config_env):
     mail.init_app(app)
     socketio.init_app(app)
     CSRFProtect(app)
+    principal.init_app(app)
     return app
 
 

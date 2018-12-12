@@ -14,6 +14,9 @@ $(function () {
             success: function (data) {
                 if(data['code']==200){
                     zlalert.alertSuccessToast('头像修改成功！');
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 500)
                 }
                 else {
                     zlalert.alertInfo(data['message']);

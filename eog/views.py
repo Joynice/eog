@@ -489,13 +489,18 @@ class AccountView(views.MethodView):
 @login_required
 def remove():
     tag = request.args.get('tag')
+    del session[DevelopmentConfig.CMS_USER_ID]
     if tag == '1':
         User.objects(email=g.eog_user.email).delete()
-        Log.objects(handler=g.eog_user.email).delete()
-        Account.objects(operator=g.eog_user.email).delete()
-        del session[DevelopmentConfig.CMS_USER_ID]
-        flash('账号删除成功！')
-        return restful.success()
+        try:
+            Log.objects(handler=g.eog_user.email).delete()
+        except:
+            pass
+        try:
+            Account.objects(operator=g.eog_user.email).delete()
+        except:
+            pass
+        return redirect(url_for('front.login'))
     else:
         return restful.params_error('传参错误！')
 

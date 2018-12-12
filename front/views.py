@@ -5,6 +5,7 @@ from .forms import SignupForm, LoginForm, ForgetpwdForm
 from .models import User
 from signals import login_signal, forget_password_signal
 from utils import restful, safeutils
+from utils.avatar import GithubAvatarGenerator
 import config
 from datetime import datetime
 
@@ -34,7 +35,9 @@ class SignupView(views.MethodView):
             password = form.password1.data
             realname = form.realname.data
             print(email)
-            user = User(email=email, username=username, realname=realname)
+            gen = GithubAvatarGenerator()
+            gen.save_avatar('./static/eog/img/user/'+email+'.png')
+            user = User(email=email, username=username, realname=realname, avatar_path='/static/eog/img/user/'+email+'.png')
             user.password = password
             user.save()
             return restful.success()

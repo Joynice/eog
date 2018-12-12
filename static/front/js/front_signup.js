@@ -23,7 +23,7 @@ $(function () {
         // var timestamp = (new Date).getTime();
         // var sign = md5(timestamp+email+"q3423805gdflvbdfvhsdoa`#$%")
         zlajax.get({
-            'url': '/front/email_captcha/',
+            'url': '/c/email_captcha/',
             'data': {
                 'email': email,
                 // 'timestamp': timestamp,

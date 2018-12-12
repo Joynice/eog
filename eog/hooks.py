@@ -2,7 +2,7 @@
 __author__ = 'Joynice'
 from .views import bp
 import config
-from flask import session, g, request
+from flask import session, g, request, render_template
 from front.models import User, Log, Account
 from .models import Event_Search_Engine, Rule, Operate_Log
 import datetime
@@ -15,15 +15,19 @@ def before_request():
         user = User.objects(_id=user_id).first()
         event_count = Event_Search_Engine.objects().count()
         rules_count = Rule.objects().count()
+
         log = Log.objects(handler=user.email).order_by('-login_time').first()
+
         all_today_log = Log.objects(handler=user.email,
                                     today=str(datetime.datetime.now().strftime('%Y-%m-%d')) + ' ' + '0:00:00').order_by(
             '-login_time').all()
+
         account = Account.objects(operator=user.email,
                                   operate_time__gte=(datetime.datetime.now() - datetime.timedelta(days=7)).strftime(
                                       "%Y-%m-%d %H:%M:%S"),
                                   operate_time__lt=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")).order_by(
             '-operate_time').all()
+
         all_user = User.objects().all()
         if user:
             g.eog_user = user
@@ -58,8 +62,14 @@ def after_request(respones):
     if path in ignore_path:
         return respones
     if config.DevelopmentConfig.CMS_USER_ID in session:
-        operate_log = Operate_Log(realname=g.eog_user.realname, ip=ip, path=path, today=datetime.datetime.today().date())
+        operate_log = Operate_Log(realname=g.eog_user.realname, ip=ip, path=path,
+                                  today=datetime.datetime.today().date())
         if path in path_and_operation_detail.keys():
             operate_log.operation = path_and_operation_detail.get(path)
         operate_log.save()
         return respones
+
+
+@bp.errorhandler
+def page_not_found():
+    return render_template('eog/404.html'), 404

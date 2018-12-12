@@ -1,5 +1,3 @@
-# -*- coding: UTF-8 -*-
-__author__ = 'Joynice'
 import random, math
 import numpy as np
 import cv2
@@ -95,3 +93,8 @@ class GithubAvatarGenerator:
     def save_avatar(self, filepath):
         img = self._get_avatar_data()
         cv2.imwrite(filepath, img)
+
+
+if __name__ == '__main__':
+    gen = GithubAvatarGenerator()
+    gen.save_avatar(filepath='../static/eog/img/user/111.png')

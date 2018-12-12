@@ -7,12 +7,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import random
 
+
 sep = os.sep
+ROLES = (('superadmin', 'superadmin'), ('admin', 'admin'), ('specialist', 'specialist'))
 
 
 class User(db.Document):
     """
-    用户登录：用户名、密码、邮箱、真实姓名、加入时间、头像地址
+    用户登录：用户名、密码、邮箱、真实姓名、加入时间、头像地址, 权限
     """
     meta = {'collection': 'user'}
     _id = db.StringField(default=shortuuid.uuid)
@@ -22,6 +24,7 @@ class User(db.Document):
     realname = db.StringField(required=True, max_length=10)
     join_time = db.DateTimeField(required=False, default=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
     avatar_path = db.StringField(required=False)
+    role = db.StringField(max_length=32, default='specialist', choices=ROLES)
 
     @property
     def password(self):
